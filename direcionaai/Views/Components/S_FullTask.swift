@@ -1,19 +1,20 @@
 //
-//  TaskView.swift
+//  S_FullAddTask.swift
 //  direcionaai
 //
 //  Created by Gabriel Azevedo Amorim Vieira Belo on 25/06/26.
 //
 
-// TELA PRINCIPAL DE TAREFAS
+
+// Sheet de tela completa de visualizar a tarefa
 import SwiftUI
 
-struct TaskView: View {
+struct S_FullTask: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    TaskView()
+    S_FullTask()
 }
