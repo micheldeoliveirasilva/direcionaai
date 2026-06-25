@@ -5,6 +5,7 @@
 //  Created by Gabriel Azevedo Amorim Vieira Belo on 25/06/26.
 //
 
+// TELA DE INTRODUÇÃO DO APP
 import SwiftUI
 
 struct OnboardingView: View {

@@ -5,6 +5,7 @@
 //  Created by Gabriel Azevedo Amorim Vieira Belo on 25/06/26.
 //
 
+// TELA DE DISCIPLINAS + CRONOGRAMA
 import SwiftUI
 
 struct ScheduleView: View {

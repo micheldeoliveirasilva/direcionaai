@@ -5,6 +5,8 @@
 //  Created by Gabriel Azevedo Amorim Vieira Belo on 25/06/26.
 //
 
+
+// Sheet de meia tela de visualizar a tarefa
 import SwiftUI
 
 struct S_QuickTask: View {
