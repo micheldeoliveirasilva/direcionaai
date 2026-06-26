@@ -74,6 +74,30 @@ Veja como está ficando a interface do nosso aplicativo:
 
 ---
 
+## 💻 Membros participantes: 
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/deblemos">
+        <img src="https://avatars.githubusercontent.com/u/173482833?v=4" width="120px;" alt="Arthur Luz"/><br>
+        <sub><b>Arthur Luz</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/gabrielbelo2007">
+        <img src="https://avatars.githubusercontent.com/u/91219977?v=4" width="120px;" alt="Gabriel Belo"/><br>
+        <sub><b>Gabriel Belo</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/micheldeoliveirasilva">
+        <img src="https://avatars.githubusercontent.com/u/216450765?v=4" width="120px;" alt="João Pedro"/><br>
+        <sub><b>João Pedro</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
 ### 📄 Documentação Adicional
 
 - [Guia de Contribuição (CONTRIBUTING.md)](CONTRIBUTING.md) - Padrões de código e branches.
