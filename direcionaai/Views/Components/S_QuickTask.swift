@@ -7,6 +7,8 @@
 
 
 // Sheet de meia tela de visualizar a tarefa
+// teste de commit
+
 import SwiftUI
 
 struct S_QuickTask: View {
