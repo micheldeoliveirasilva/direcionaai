@@ -24,16 +24,16 @@ Abaixo está a organização dos arquivos do projeto, seguindo o padrão de arqu
 direcionaai/
 ├── direcionaai/
 │   ├── App/                        # Ciclo de vida e configurações globais do app
-│   ├── Models/                     # Estruturas de dados e regras de negócio
+│   ├── Models/                     # Estruturas de dados
 │   │   ├── Schedule.swift          # Modelo de Horários/Cronograma
 │   │   ├── Subject.swift           # Modelo de Matérias/Disciplinas
 │   │   └── Task.swift              # Modelo de Tarefas
 │   ├── Views/                      # Telas e Componentes visuais
 │   │   ├── Components/             # Subvisões e componentes reutilizáveis
 │   │   │   ├── S_AddTask.swift     # Modal/Sheet para adicionar tarefa
-│   │   │   └── S_Task.swift        # Card/Linha de renderização da tarefa
+│   │   │   └── S_Task.swift        # Modal/Sheet para visualizar/editar tarefa
 │   │   ├── Subjects/               # Fluxo de Matérias e Grade Horária
-│   │   │   ├── S_AddExam.swift     # Modal para adicionar exame
+│   │   │   ├── S_AddExam.swift     # Modal para adicionar nota de exame
 │   │   │   ├── S_AddSubject.swift  # Modal para adicionar matéria
 │   │   │   ├── ScheduleView.swift  # Tela de grade de horários
 │   │   │   ├── SubjectListView.swift # Lista geral de matérias
@@ -56,7 +56,7 @@ direcionaai/
 | :--- | :--- |
 | Débora Lemos | ? | 
 | Gabriel Belo | ?|
-| Michel Oliveira | ? | 
+| Michel Silva | ? | 
 
 ---
 
@@ -79,8 +79,8 @@ Veja como está ficando a interface do nosso aplicativo:
   <tr>
     <td align="center">
       <a href="https://github.com/deblemos">
-        <img src="https://avatars.githubusercontent.com/u/173482833?v=4" width="120px;" alt="Arthur Luz"/><br>
-        <sub><b>Arthur Luz</b></sub>
+        <img src="https://avatars.githubusercontent.com/u/102696473?v=4" width="120px;" alt="Débora Lemos"/><br>
+        <sub><b>Débora Lemos</b></sub>
       </a>
     </td>
     <td align="center">
@@ -91,8 +91,8 @@ Veja como está ficando a interface do nosso aplicativo:
     </td>
     <td align="center">
       <a href="https://github.com/micheldeoliveirasilva">
-        <img src="https://avatars.githubusercontent.com/u/216450765?v=4" width="120px;" alt="João Pedro"/><br>
-        <sub><b>João Pedro</b></sub>
+        <img src="https://avatars.githubusercontent.com/u/285756766?v=4" width="120px;" alt="Michel Silva"/><br>
+        <sub><b>Michel Silva</b></sub>
       </a>
     </td>
   </tr>
