@@ -16,7 +16,68 @@ struct TaskView: View {
        
         NavigationStack{
             
-            Text("Atividades")
+            
+            
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text("Para fazer")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        
+                        HStack {
+                            
+                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, taskTags: "História")
+                            
+                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            
+                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                        }
+                    }
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("Em andamento")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        
+                        HStack {
+                            
+                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, taskTags: "História")
+                            
+                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            
+                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                        }
+                    }
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("Concluído")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        
+                        HStack {
+                            
+                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, taskTags: "História")
+                            
+                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            
+                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                        }
+                    }
+                }
+                
+            }
+            .padding(10)
                 .navigationTitle("Tarefas")
                 .toolbar{
                     

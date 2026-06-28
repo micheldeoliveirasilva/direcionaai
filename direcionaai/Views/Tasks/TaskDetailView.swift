@@ -9,11 +9,49 @@
 import SwiftUI
 
 struct TaskDetailView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    
+    let taskTittle: String
+    let taskDescription: String
+    let color: Color
+    let taskTags: String
 
+
+    var body: some View {
+                
+        GroupBox {
+            VStack(alignment: .leading) {
+                
+                                    
+                    Text(taskTittle)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .lineLimit(2)
+                
+                HStack {
+                    
+                    Text(taskTags)
+                        .font(.footnote)
+                        .fontWeight(.light)
+                        .padding(5)
+                        .background(color.secondary)
+                        .cornerRadius(6)
+                    
+                    Text("Leitura")
+                        .font(.footnote)
+                        .fontWeight(.light)
+                        .padding(5)
+                        .background(.blue.secondary)
+                        .cornerRadius(6)
+
+                }
+                
+            }
+            .frame(width: 150, height: 100, alignment: .leading)
+
+        }
+    }
+    
+}
 #Preview {
-    TaskDetailView()
+    TaskDetailView(taskTittle: "Teste de título longo porque contem muitas palvras para ver se o text se corta", taskDescription: "TaskDescription" , color: .orange, taskTags: "História")
 }
