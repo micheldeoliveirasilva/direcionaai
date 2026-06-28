@@ -9,12 +9,12 @@
 // Sheet de tela completa de visualizar a tarefa
 import SwiftUI
 
-struct S_FullTask: View {
+struct S_Task: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    S_FullTask()
+    S_Task()
 }

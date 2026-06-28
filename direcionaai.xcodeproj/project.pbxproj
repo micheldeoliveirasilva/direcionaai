@@ -6,7 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9CFF2D612FEF072C00E93377 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9CFF2D5F2FEF072600E93377 /* README.md */; };
+		9CFF2D642FEF073C00E93377 /* CONTRIBUTING.md in Resources */ = {isa = PBXBuildFile; fileRef = 9CFF2D622FEF073700E93377 /* CONTRIBUTING.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		9CFF2D5F2FEF072600E93377 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9CFF2D622FEF073700E93377 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		AC2FAC852FED5C46000F3963 /* direcionaai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = direcionaai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -34,6 +41,8 @@
 			children = (
 				AC2FAC872FED5C46000F3963 /* direcionaai */,
 				AC2FAC862FED5C46000F3963 /* Products */,
+				9CFF2D622FEF073700E93377 /* CONTRIBUTING.md */,
+				9CFF2D5F2FEF072600E93377 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +118,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CFF2D612FEF072C00E93377 /* README.md in Resources */,
+				9CFF2D642FEF073C00E93377 /* CONTRIBUTING.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
