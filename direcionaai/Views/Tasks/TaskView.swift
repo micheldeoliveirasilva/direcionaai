@@ -13,7 +13,7 @@ struct TaskView: View {
     @State private var currentDetent: PresentationDetent = .medium
     
     var body: some View {
-       
+        
         NavigationStack{
             
             
@@ -29,11 +29,11 @@ struct TaskView: View {
                         
                         HStack {
                             
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
                             
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
                             
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
                         }
                     }
                 }
@@ -48,11 +48,11 @@ struct TaskView: View {
                         
                         HStack {
                             
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
                             
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
                             
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
                         }
                     }
                 }
@@ -67,46 +67,54 @@ struct TaskView: View {
                         
                         HStack {
                             
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
                             
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
                             
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, taskTags: "História")
+                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
                         }
                     }
                 }
                 
             }
             .padding(10)
-                .navigationTitle("Tarefas")
-                .toolbar{
-                    
-                    ToolbarItem(placement: .topBarTrailing){
-                        Button(action: {
-                            S_addTask.toggle()
-                        }) {
-                            Label("Adicionar tarefa", systemImage: "archivebox.fill")
-                        }
-                    }
-                    
-                    ToolbarItem(placement: .topBarTrailing){
-                        Button(action: {
-                            S_addTask.toggle()
-                        }) {
-                            Label("Adicionar tarefa", systemImage: "plus")
-                        }
+            .navigationTitle("Tarefas")
+            .toolbar{
+                
+                ToolbarItem(placement: .topBarTrailing){
+                    NavigationLink{
+                        ArchTasksView()
+                    } label : {
+                        Image(systemName: "archivebox.fill")
                     }
                 }
-                .sheet(isPresented: $S_addTask) {
-                    
-                    S_AddTask(actualDetent: $currentDetent)
-                        .presentationDetents([.medium, .large], selection: $currentDetent)
-                        .presentationDragIndicator(.visible)
-                        .onDisappear{
-                            currentDetent = .medium
-                        }
+                
+                ToolbarItem(placement: .topBarTrailing){
+                    Button(action: {
+                        S_addTask.toggle()
+                    }) {
+                        Label("Adicionar tarefa", systemImage: "plus")
+                    }
                 }
-    
+                
+                ToolbarItem(placement: .topBarLeading){
+                    Button(action: {
+                        print("Visualizar lembretes")
+                    }) {
+                        Label("Lembretes", systemImage: "bell.fill")
+                    }
+                }
+            }
+            .sheet(isPresented: $S_addTask) {
+                
+                S_AddTask(actualDetent: $currentDetent)
+                    .presentationDetents([.medium, .large], selection: $currentDetent)
+                    .presentationDragIndicator(.visible)
+                    .onDisappear{
+                        currentDetent = .medium
+                    }
+            }
+            
         }
         
     }

@@ -13,7 +13,8 @@ struct TaskDetailView: View {
     let taskTittle: String
     let taskDescription: String
     let color: Color
-    let taskTags: String
+    let subjectTag: String
+    let priorityTag: String
 
 
     var body: some View {
@@ -29,14 +30,14 @@ struct TaskDetailView: View {
                 
                 HStack {
                     
-                    Text(taskTags)
+                    Text(subjectTag)
                         .font(.footnote)
                         .fontWeight(.light)
                         .padding(5)
                         .background(color.secondary)
                         .cornerRadius(6)
                     
-                    Text("Leitura")
+                    Text(priorityTag)
                         .font(.footnote)
                         .fontWeight(.light)
                         .padding(5)
@@ -53,5 +54,5 @@ struct TaskDetailView: View {
     
 }
 #Preview {
-    TaskDetailView(taskTittle: "Teste de título longo porque contem muitas palvras para ver se o text se corta", taskDescription: "TaskDescription" , color: .orange, taskTags: "História")
+    TaskDetailView(taskTittle: "Teste de título longo porque contem muitas palvras para ver se o text se corta", taskDescription: "TaskDescription" , color: .orange, subjectTag: "História", priorityTag: "Média")
 }
