@@ -12,7 +12,7 @@ struct S_AddTask: View {
     @Binding var actualDetent: PresentationDetent // Captura o tamanho da sheet
     
     // var existTask: Task? -> Usando o Model da Task
-    
+
     //MARK: Variáveis do formulário (medium)
     
     @State private var taskName = ""
@@ -63,6 +63,20 @@ struct S_AddTask: View {
                                 .frame(height: 150)
                         }
                     }
+                    
+                    if true { //existTask != nil
+                        
+                        Button(role: .destructive){
+                            dismiss()
+                        } label : {
+                            HStack {
+                                Spacer()
+                                Text("Arquivar Nota")
+                                Spacer()
+                            }
+                        }
+                    }
+                    
                 }
                 
             }
@@ -77,18 +91,18 @@ struct S_AddTask: View {
 //            }
             .toolbar {
                 
+                ToolbarItem(placement: .principal){
+                    Text("Adicionar tarefa") //existTask == nil ? "Adicionar tarefa" : "Editar Nota")
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                }
+                
                 ToolbarItem(placement: .topBarLeading) { // Não sei se precisa ter
                     Button(action: {
                         dismiss()
                     }){
                         Label("Fechar", systemImage: "xmark")
                     }
-                }
-                
-                ToolbarItem(placement: .principal){
-                    Text("Adicionar tarefa")
-                        .font(.headline)
-                        .foregroundColor(.primary)
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
