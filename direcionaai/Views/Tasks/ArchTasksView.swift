@@ -11,7 +11,23 @@ import SwiftUI
 
 struct ArchTasksView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      
+        ScrollView {
+            VStack(alignment: .leading) {
+                
+                TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
+                
+                TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
+                
+                TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
+                    
+            }
+            
+        }
+        .padding(10)
+        .navigationTitle("Arquivados")
+        .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 
