@@ -7,15 +7,16 @@
 
 // INFORMAÇÕES DA VISUALIZAÇÃO DA TAREFA COMO O QUADRADO
 import SwiftUI
+import SwiftData
+
+
 
 struct TaskDetailView: View {
     
-    let taskTittle: String
-    let taskDescription: String
-    let color: Color
-    let subjectTag: String
-    let priorityTag: String
+    let subject: Subject
+    let task: UserTask
 
+    @Environment(\.modelContext) var modelContext
 
     var body: some View {
                 
@@ -23,24 +24,26 @@ struct TaskDetailView: View {
             VStack(alignment: .leading) {
                 
                                     
-                    Text(taskTittle)
+                Text(task.taskName)
                         .font(.title3)
                         .fontWeight(.bold)
                         .lineLimit(2)
                 
                 HStack {
                     
-                    Text(subjectTag)
+                    Text(subject.subjectName)
                         .font(.footnote)
                         .fontWeight(.light)
                         .padding(5)
-                        .background(color.secondary)
+// add later subject.color
+                        .background(.red.secondary)
                         .cornerRadius(6)
                     
-                    Text(priorityTag)
+                    Text(task.priority.rawValue)
                         .font(.footnote)
                         .fontWeight(.light)
                         .padding(5)
+// add later task.priority.color
                         .background(.blue.secondary)
                         .cornerRadius(6)
 
@@ -54,5 +57,12 @@ struct TaskDetailView: View {
     
 }
 #Preview {
-    TaskDetailView(taskTittle: "Teste de título longo porque contem muitas palvras para ver se o text se corta", taskDescription: "TaskDescription" , color: .orange, subjectTag: "História", priorityTag: "Média")
+    
+    let subject = Subject(exams: [], subjectName: "Matemática", professorName: "", professorEmail: "", subjectDescription: "", subjectDay: "", startTime: .now, endTime: .now, absences: 0)
+    
+    let task = UserTask(taskName: "Fazer lista", priority: .high, subject: subject, dateLimit: .now, notes: "", progress: "", status: .done)
+        
+    TaskDetailView(
+        
+        subject: subject, task: task)
 }
