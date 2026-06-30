@@ -1,19 +1,18 @@
 //
-//  TaskView.swift
+//  S_AddSubject.swift
 //  direcionaai
 //
-//  Created by Gabriel Azevedo Amorim Vieira Belo on 25/06/26.
+//  Created by Gabriel Azevedo Amorim Vieira Belo on 26/06/26.
 //
 
-// TELA PRINCIPAL DE TAREFAS
 import SwiftUI
 
-struct TaskView: View {
+struct S_AddSubject: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    TaskView()
+    S_AddSubject()
 }
