@@ -27,18 +27,20 @@ class UserTask {
     
     var taskName: String
     var priority: Priority
-    var subject: String
+    var subject: Subject
     var dateLimit: Date
     var notes: String
     var progress: String
+    var status: Status
     
     init(
         taskName: String,
         priority: Priority,
-        subject: String,
+        subject: Subject,
         dateLimit: Date,
         notes: String,
-        progress: String
+        progress: String,
+        status: Status
     ) {
         self.taskName = taskName
         self.priority = priority
@@ -46,5 +48,6 @@ class UserTask {
         self.dateLimit = dateLimit
         self.notes = notes
         self.progress = progress
+        self.status = status
     }
 }
