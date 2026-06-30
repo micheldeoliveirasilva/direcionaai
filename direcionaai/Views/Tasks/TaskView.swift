@@ -7,11 +7,13 @@
 
 // TELA PRINCIPAL DE TAREFAS
 import SwiftUI
+import SwiftData
 
 struct TaskView: View {
     @State private var S_addTask = false;
     @State private var currentDetent: PresentationDetent = .medium
     
+    @Environment(\.modelContext) var modelContext
     var body: some View {
         
         NavigationStack{
@@ -28,12 +30,7 @@ struct TaskView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         
                         HStack {
-                            
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
+
                         }
                     }
                 }
@@ -48,11 +45,6 @@ struct TaskView: View {
                         
                         HStack {
                             
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
                         }
                     }
                 }
@@ -67,11 +59,7 @@ struct TaskView: View {
                         
                         HStack {
                             
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
+
                         }
                     }
                 }
@@ -122,5 +110,10 @@ struct TaskView: View {
 
 
 #Preview {
+    
+        let subject = Subject(exams: [], subjectName: "Matemática", professorName: "", professorEmail: "", subjectDescription: "", subjectDay: "", startTime: .now, endTime: .now, absences: 0)
+        
+        let task = UserTask(taskName: "Fazer lista", priority: .high, subject: subject, dateLimit: .now, notes: "", progress: "", status: .done)
+        
     TaskView()
 }

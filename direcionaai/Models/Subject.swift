@@ -29,7 +29,7 @@ class Subject {
     var startTime: Date
     var endTime: Date
     var absences: Int
-    var subjectColor: Color
+//    var subjectColor: Color
 
     init(
         exams: [Exams],
@@ -41,7 +41,7 @@ class Subject {
         startTime: Date,
         endTime: Date,
         absences: Int,
-        color: Color
+//        color: Color
     ) {
         self.exams = exams
         self.subjectName = subjectName
@@ -52,7 +52,7 @@ class Subject {
         self.startTime = startTime
         self.endTime = endTime
         self.absences = absences
-        self.subjectColor = color
+//        self.subjectColor = color
     }
 }
 
