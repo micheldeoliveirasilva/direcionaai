@@ -7,16 +7,11 @@
 
 // INFORMAÇÕES DA VISUALIZAÇÃO DA TAREFA COMO O QUADRADO
 import SwiftUI
-import SwiftData
-
 
 
 struct TaskDetailView: View {
     
-    let subject: Subject
     let task: UserTask
-
-    @Environment(\.modelContext) var modelContext
 
     var body: some View {
                 
@@ -31,7 +26,7 @@ struct TaskDetailView: View {
                 
                 HStack {
                     
-                    Text(subject.subjectName)
+                    Text(task.subject.subjectName)
                         .font(.footnote)
                         .fontWeight(.light)
                         .padding(5)
@@ -62,7 +57,5 @@ struct TaskDetailView: View {
     
     let task = UserTask(taskName: "Fazer lista", priority: .high, subject: subject, dateLimit: .now, notes: "", progress: "", status: .done)
         
-    TaskDetailView(
-        
-        subject: subject, task: task)
+    TaskDetailView(task: task)
 }
