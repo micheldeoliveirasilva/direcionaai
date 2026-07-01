@@ -15,6 +15,7 @@ struct TaskDetailView: View {
 
     var body: some View {
                 
+
         GroupBox {
             VStack(alignment: .leading) {
                 
@@ -31,7 +32,7 @@ struct TaskDetailView: View {
                         .fontWeight(.light)
                         .padding(5)
 // add later subject.color
-                        .background(.red.secondary)
+                        .background(task.subjectColor.color)
                         .cornerRadius(6)
                     
                     Text(task.priority.rawValue)
@@ -39,7 +40,7 @@ struct TaskDetailView: View {
                         .fontWeight(.light)
                         .padding(5)
 // add later task.priority.color
-                        .background(.blue.secondary)
+                        .background(taskColor)
                         .cornerRadius(6)
 
                 }
@@ -53,9 +54,9 @@ struct TaskDetailView: View {
 }
 #Preview {
     
-    let subject = Subject(exams: [], subjectName: "Matemática", professorName: "", professorEmail: "", subjectDescription: "", subjectDay: "", startTime: .now, endTime: .now, absences: 0)
+    let subject = Subject(exams: [], subjectName: "Matemática", professorName: "", professorEmail: "", subjectDescription: "", subjectDay: "", startTime: .now, endTime: .now, absences: 0, subjectColor: .vermelho)
     
-    let task = UserTask(taskName: "Fazer lista", priority: .high, subject: subject, dateLimit: .now, notes: "", progress: "", status: .done)
+    let task = UserTask(taskName: "Fazer lista", priority: .low, subject: subject, dateLimit: .now, notes: "", progress: "", status: .done, subjectColor: .amarelo)
         
     TaskDetailView(task: task)
 }
