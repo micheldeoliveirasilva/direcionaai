@@ -7,18 +7,23 @@
 
 // TELA PRINCIPAL DE TAREFAS
 import SwiftUI
+import SwiftData
 
 struct TaskView: View {
     @State private var S_addTask = false;
     @State private var currentDetent: PresentationDetent = .medium
     
+    
+    @Query var tasks: [UserTask]
+    // busca no swiftData as tasks armazenadas no model UserTask
+
     var body: some View {
         
         NavigationStack{
             
             
-            
             ScrollView {
+                
                 VStack(alignment: .leading) {
                     Text("Para fazer")
                         .font(.title)
@@ -29,98 +34,102 @@ struct TaskView: View {
                         
                         HStack {
                             
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
                             
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
+                            ForEach(tasks) { task in
+                                if task.status == .toDo {
+                                    TaskDetailView(task: task)
+                                }
+                            }
+                            // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
+
+                                
+                            }
                         }
                     }
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("Em andamento")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
                     
-                    ScrollView(.horizontal, showsIndicators: false) {
+                    VStack(alignment: .leading) {
+                        Text("Em andamento")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .padding()
                         
-                        HStack {
+                        ScrollView(.horizontal, showsIndicators: false) {
                             
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
+                            HStack {
+                                
+                                ForEach(tasks) { task in
+                                    if task.status == .inProgress {
+                                        TaskDetailView(task: task)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        VStack(alignment: .leading) {
+                            Text("Concluído")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding()
                             
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                
+                                HStack {ForEach(tasks) { task in
+                                    if task.status == .done {
+                                        TaskDetailView(task: task)
+                                    }
+                                }
+                                    
+                                }
+                            }
+                        }
+                        
+                    }
+                    .padding(10)
+                    .navigationTitle("Tarefas")
+                    .toolbar{
+                        
+                        ToolbarItem(placement: .topBarTrailing){
+                            NavigationLink{
+                                ArchTasksView()
+                            } label : {
+                                Image(systemName: "archivebox.fill")
+                            }
+                        }
+                        
+                        ToolbarItem(placement: .topBarTrailing){
+                            Button(action: {
+                                S_addTask.toggle()
+                            }) {
+                                Label("Adicionar tarefa", systemImage: "plus")
+                            }
+                        }
+                        
+                        ToolbarItem(placement: .topBarLeading){
+                            Button(action: {
+                                print("Visualizar lembretes")
+                            }) {
+                                Label("Lembretes", systemImage: "bell.fill")
+                            }
                         }
                     }
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("Concluído")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
+                    .sheet(isPresented: $S_addTask) {
+                        
+                        S_AddTask(actualDetent: $currentDetent)
+                            .presentationDetents([.medium, .large], selection: $currentDetent)
+                            .presentationDragIndicator(.visible)
+                            .onDisappear{
+                                currentDetent = .medium
+                            }
+                    }
                     
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        
-                        HStack {
-                            
-                            TaskDetailView(taskTittle: "Fazer lista de história", taskDescription: "Realizar lista de tarefas", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Lembrar de fazer compras", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
-                            
-                            TaskDetailView(taskTittle: "Estudar para prova", taskDescription: "TaskDescription", color: .orange, subjectTag: "História", priorityTag: "Média")
-                        }
-                    }
                 }
                 
             }
-            .padding(10)
-            .navigationTitle("Tarefas")
-            .toolbar{
-                
-                ToolbarItem(placement: .topBarTrailing){
-                    NavigationLink{
-                        ArchTasksView()
-                    } label : {
-                        Image(systemName: "archivebox.fill")
-                    }
-                }
-                
-                ToolbarItem(placement: .topBarTrailing){
-                    Button(action: {
-                        S_addTask.toggle()
-                    }) {
-                        Label("Adicionar tarefa", systemImage: "plus")
-                    }
-                }
-                
-                ToolbarItem(placement: .topBarLeading){
-                    Button(action: {
-                        print("Visualizar lembretes")
-                    }) {
-                        Label("Lembretes", systemImage: "bell.fill")
-                    }
-                }
-            }
-            .sheet(isPresented: $S_addTask) {
-                
-                S_AddTask(actualDetent: $currentDetent)
-                    .presentationDetents([.medium, .large], selection: $currentDetent)
-                    .presentationDragIndicator(.visible)
-                    .onDisappear{
-                        currentDetent = .medium
-                    }
-            }
-            
         }
-        
     }
-}
 
 
 #Preview {
+    
     TaskView()
 }
