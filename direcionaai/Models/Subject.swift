@@ -7,6 +7,7 @@
 // criar uma struct e fazer um array dessa struct para avaliacao
 // Dados das disciplinas
 import Foundation
+import SwiftUI
 import SwiftData
 
 struct Exams: Codable {
@@ -27,8 +28,8 @@ class Subject {
     var subjectDay: String
     var startTime: Date
     var endTime: Date
-    
     var absences: Int
+//    var subjectColor: Color
 
     init(
         exams: [Exams],
@@ -39,7 +40,8 @@ class Subject {
         subjectDay: String,
         startTime: Date,
         endTime: Date,
-        absences: Int
+        absences: Int,
+//        color: Color
     ) {
         self.exams = exams
         self.subjectName = subjectName
@@ -50,6 +52,7 @@ class Subject {
         self.startTime = startTime
         self.endTime = endTime
         self.absences = absences
+//        self.subjectColor = color
     }
 }
 
