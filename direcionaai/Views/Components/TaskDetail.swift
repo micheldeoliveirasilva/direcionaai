@@ -9,7 +9,7 @@
 import SwiftUI
 
 
-struct TaskDetailView: View {
+struct TaskDetail: View {
     
     let task: UserTask
 
@@ -40,7 +40,7 @@ struct TaskDetailView: View {
                         .fontWeight(.light)
                         .padding(5)
 // add later task.priority.color
-                        .background(taskColor)
+                        .background(task.priority.color)
                         .cornerRadius(6)
 
                 }
@@ -58,5 +58,5 @@ struct TaskDetailView: View {
     
     let task = UserTask(taskName: "Fazer lista", priority: .low, subject: subject, dateLimit: .now, notes: "", progress: "", status: .done, subjectColor: .amarelo)
         
-    TaskDetailView(task: task)
+    TaskDetail(task: task)
 }
