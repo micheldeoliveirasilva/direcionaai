@@ -19,33 +19,50 @@ struct S_Task: View {
     var existTask: UserTask?
     
     //MARK: Variáveis do formulário (medium)
-    
     @State private var taskName = ""
     @State private var selectedSubject: Subject?
     @State private var selectedPriority: Priority = .medium
     @State private var dateLimit = Date()
     
-    //MARK: Variáveis do formulário (large)
+    let subjects = ["Teste", "Teste 2"]
     
+    //MARK: Variáveis do formulário (large)
     @State private var notes = ""
     
-    var body: some View {
+    //MARK: Função de salvar
+    private func saveTask() {
+        guard let safeSubject = selectedSubject else { return }
         
-        NavigationStack{
-            
-            Form{
-                
-                Section(header: Text("Criar Atividade")){
+        if let task = existTask {
+            // Modo Edição
+            task.taskName = taskName
+            task.priority = selectedPriority
+            task.subject = safeSubject
+            task.dateLimit = dateLimit
+            task.notes = notes
+        } else {
+            // Modo Criação
+            let newTask = UserTask(taskName: taskName, priority: selectedPriority, subject: safeSubject, dateLimit: .now, notes: "", status: .toDo)
+            modelContext.insert(newTask)
+        }
+        
+        dismiss()
+    }
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section(header: Text("Criar Atividade")) {
                     TextField("Nome", text: $taskName)
                     
-                    Picker("Prioridade", selection: $selectedPriority){
-                        ForEach(Priority.allCases, id: \.self){
+                    Picker("Prioridade", selection: $selectedPriority) {
+                        ForEach(Priority.allCases, id: \.self) {
                             Text($0.rawValue.capitalized).tag($0)
                         }
                     }
                     .pickerStyle(.segmented)
                     
-                    Picker("Disciplina", selection: $selectedSubject){
+                    Picker("Disciplina", selection: $selectedSubject) {
                         Text("Selecione uma disciplina").tag(nil as Subject?)
                         
                         ForEach(allSubjects) { subject in
@@ -58,10 +75,8 @@ struct S_Task: View {
                 }
                 
                 if actualDetent == .large {
-                    
-                    Section(header: Text("Informações adicionais")){
-                        
-                        VStack(alignment: .leading){
+                    Section(header: Text("Informações adicionais")) {
+                        VStack(alignment: .leading) {
                             Text("Notas adicionais")
                                 .font(.caption)
                                 .foregroundColor(.gray)
@@ -71,13 +86,10 @@ struct S_Task: View {
                     }
                     
                     if let task = existTask {
-                        
-                        Button(role: .destructive){
-                            
+                        Button(role: .destructive) {
                             task.status = .archived
                             dismiss()
-                            
-                        } label : {
+                        } label: {
                             HStack {
                                 Spacer()
                                 Text("Arquivar Nota")
@@ -85,10 +97,9 @@ struct S_Task: View {
                             }
                         }
                     }
-                    
                 }
             }
-            .onAppear{
+            .onAppear {
                 if let task = existTask {
                     taskName = task.taskName
                     self.selectedPriority = task.priority
@@ -96,10 +107,13 @@ struct S_Task: View {
                     dateLimit = task.dateLimit
                     notes = task.notes
                 }
+                else {
+                    self.selectedSubject = allSubjects.first
+                }
             }
             .toolbar {
                 
-                ToolbarItem(placement: .principal){
+                ToolbarItem(placement: .principal) {
                     Text(existTask == nil ? "Adicionar tarefa" : "Editar Nota")
                         .font(.headline)
                         .foregroundColor(.primary)
@@ -108,37 +122,18 @@ struct S_Task: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
                         dismiss()
-                    }){
+                    }) {
                         Label("Fechar", systemImage: "xmark")
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        
-                        if let selectedSubjectSafe = selectedSubject {
-                            
-                            if let task = existTask {
-                                
-                                task.taskName = taskName
-                                task.priority = selectedPriority
-                                task.subject = selectedSubjectSafe
-                                task.dateLimit = dateLimit
-                                task.notes = notes
-                                
-                            } else {
-                                
-                                let newTask = UserTask(title: taskName, priority: selectedPriority, subject: selectedSubjectSafe)
-                                modelContext.insert(newTask)
-                            }
-                            
-                            dismiss()
-                        }
-                    }){
+                    Button(action: saveTask) {
                         Label("Salvar", systemImage: "checkmark")
                     }
-                    .disabled(taskName.isEmpty)
+                    .disabled(taskName.isEmpty || selectedSubject == nil)
                 }
+                
             }
         }
     }
