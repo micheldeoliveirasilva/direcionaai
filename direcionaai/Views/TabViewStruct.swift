@@ -59,19 +59,11 @@ TabViewStruct: View {
                             Button(action: {
                                 selectedTask = task
                             }) {
-                                TaskDetailView(
-                                    taskTittle: task.taskName,
-                                    color: .purple,
-                                    subjectTag: "História",
-                                    priorityTag: "Alta"
-                            )}
+                                TaskDetailView(task: task)}
                         }
                         .navigationTitle("Buscar")
                         .sheet(item: $selectedTask) { showTask in
-                            S_AddTask(
-                                actualDetent: $currentDetent,
-                                //task: showTask
-                            )
+                            S_AddTask(actualDetent: $currentDetent)
                             .presentationDetents([.medium, .large], selection: $currentDetent)
                         }
                     }
