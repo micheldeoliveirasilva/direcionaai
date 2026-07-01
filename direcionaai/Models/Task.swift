@@ -32,6 +32,7 @@ class UserTask {
     var notes: String
     var progress: String
     var status: Status
+    var subjectColor: SubjectColor
     
     init(
         taskName: String,
@@ -40,7 +41,8 @@ class UserTask {
         dateLimit: Date,
         notes: String,
         progress: String,
-        status: Status
+        status: Status,
+        subjectColor: SubjectColor
     ) {
         self.taskName = taskName
         self.priority = priority
@@ -49,5 +51,7 @@ class UserTask {
         self.notes = notes
         self.progress = progress
         self.status = status
+        self.subjectColor = subjectColor
+
     }
 }
