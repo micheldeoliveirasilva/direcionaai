@@ -25,7 +25,8 @@ enum Priority: String, Codable, CaseIterable {
             return .green
         }
     }
-    
+}
+
     enum Status: String, Codable, CaseIterable {
         case toDo = "Para fazer"
         case inProgress = "Em andamento"
@@ -66,4 +67,4 @@ enum Priority: String, Codable, CaseIterable {
             
         }
     }
-}
+
