@@ -37,7 +37,7 @@ struct TaskView: View {
                             
                             ForEach(tasks) { task in
                                 if task.status == .toDo {
-                                    TaskDetailView(task: task)
+                                    TaskDetail(task: task)
                                 }
                             }
                             // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
@@ -59,7 +59,7 @@ struct TaskView: View {
                                 
                                 ForEach(tasks) { task in
                                     if task.status == .inProgress {
-                                        TaskDetailView(task: task)
+                                        TaskDetail(task: task)
                                     }
                                 }
                             }
@@ -75,7 +75,7 @@ struct TaskView: View {
                                 
                                 HStack {ForEach(tasks) { task in
                                     if task.status == .done {
-                                        TaskDetailView(task: task)
+                                        TaskDetail(task: task)
                                     }
                                 }
                                     
@@ -94,7 +94,10 @@ struct TaskView: View {
                             } label : {
                                 Image(systemName: "archivebox.fill")
                             }
+                            
                         }
+                        
+                        ToolbarSpacer(.flexible, placement: .topBarTrailing)
                         
                         ToolbarItem(placement: .topBarTrailing){
                             Button(action: {
