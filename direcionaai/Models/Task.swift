@@ -8,11 +8,23 @@
 // Dados das atividades
 import Foundation
 import SwiftData
+import SwiftUI
 
 enum Priority: String, Codable, CaseIterable {
     case low = "Baixa"
     case medium = "Média"
     case high = "Alta"
+    
+    var color: Color {
+        switch self {
+        case .high:
+            return .red
+        case .medium:
+            return .yellow
+        case .low:
+            return .green
+        }
+    }
 }
 
 enum Status: String, Codable, CaseIterable {
@@ -30,7 +42,6 @@ class UserTask {
     var subject: Subject
     var dateLimit: Date
     var notes: String
-    var progress: String
     var status: Status
     
     init(
@@ -39,15 +50,14 @@ class UserTask {
         subject: Subject,
         dateLimit: Date,
         notes: String,
-        progress: String,
-        status: Status
+        status: Status,
     ) {
         self.taskName = taskName
         self.priority = priority
         self.subject = subject
         self.dateLimit = dateLimit
         self.notes = notes
-        self.progress = progress
         self.status = status
     }
 }
+
