@@ -11,7 +11,18 @@ import SwiftUI
 
 struct ArchTasksView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      
+        ScrollView {
+            VStack(alignment: .leading) {
+                Text("Arquivados")
+                    
+            }
+            
+        }
+        .padding(10)
+        .navigationTitle("Arquivados")
+        .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 
