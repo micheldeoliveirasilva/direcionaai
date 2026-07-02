@@ -7,9 +7,32 @@
 
 // TABVIEW DE TAREFAS, DISCIPLINA E SEARCH
 import SwiftUI
+import SwiftData
 
 struct
 TabViewStruct: View {
+    
+    @Environment(\.modelContext) private var context
+    
+    @State private var searchText = ""
+    
+    // Visualizar task
+    @State private var selectedTask: UserTask? = nil
+    @State private var currentDetent: PresentationDetent = .medium
+    
+    // Filtar tasks
+    @Query var tasks: [UserTask]
+    
+    var filteredTasks: [UserTask] {
+        if searchText.isEmpty {
+            return []
+        } else {
+            return tasks.filter { task in
+                task.taskName.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
     var body: some View {
         
         TabView {
@@ -26,11 +49,31 @@ TabViewStruct: View {
             
             Tab("Pesquisar", systemImage: "magnifyingglass", role: .search) {
                 
+                NavigationStack {
+                    if filteredTasks.isEmpty && !searchText.isEmpty {
+                        ContentUnavailableView.search(text: searchText)
+                    } else {
+                        
+                        List(filteredTasks) { task in
+                            
+                            Button(action: {
+                                selectedTask = task
+                            }) {
+                                TaskDetailView(task: task)}
+                        }
+                        .navigationTitle("Buscar")
+                        .sheet(item: $selectedTask) { showTask in
+                            S_AddTask(actualDetent: $currentDetent)
+                            .presentationDetents([.medium, .large], selection: $currentDetent)
+                        }
+                    }
+                }
+                .searchable(text: $searchText, prompt: "Pesquisar por tarefa...")
+                
             }
-            
         }
+        
     }
-    
 }
 
 #Preview {
