@@ -31,15 +31,13 @@ struct TaskDetail: View {
                         .font(.footnote)
                         .fontWeight(.light)
                         .padding(5)
-// add later subject.color
-                        .background(task.subjectColor.color)
+                        .background(task.subject.subjectColor.color.opacity(0.6))
                         .cornerRadius(6)
                     
                     Text(task.priority.rawValue)
                         .font(.footnote)
                         .fontWeight(.light)
                         .padding(5)
-// add later task.priority.color
                         .background(task.priority.color)
                         .cornerRadius(6)
 
@@ -56,7 +54,7 @@ struct TaskDetail: View {
     
     let subject = Subject(exams: [], subjectName: "Matemática", professorName: "", professorEmail: "", subjectDescription: "", subjectDay: "", startTime: .now, endTime: .now, absences: 0, subjectColor: .vermelho)
     
-    let task = UserTask(taskName: "Fazer lista", priority: .low, subject: subject, dateLimit: .now, notes: "", progress: "", status: .done, subjectColor: .amarelo)
+    let task = UserTask(taskName: "Fazer lista", priority: .low, subject: subject, dateLimit: .now, notes: "", progress: "", status: .done, subjectColor: .verde)
         
     TaskDetail(task: task)
 }

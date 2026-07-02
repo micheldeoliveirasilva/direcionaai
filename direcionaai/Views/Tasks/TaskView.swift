@@ -94,7 +94,10 @@ struct TaskView: View {
                             } label : {
                                 Image(systemName: "archivebox.fill")
                             }
+                            
                         }
+                        
+                        ToolbarSpacer(.flexible, placement: .topBarTrailing)
                         
                         ToolbarItem(placement: .topBarTrailing){
                             Button(action: {
