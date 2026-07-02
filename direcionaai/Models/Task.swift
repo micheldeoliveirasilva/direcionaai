@@ -60,3 +60,4 @@ class UserTask {
         self.status = status
     }
 }
+
