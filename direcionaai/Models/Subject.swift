@@ -55,19 +55,19 @@ enum SubjectColor: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-enum weekDay: String, Codable, CaseIterable {
+enum WeekDay: String, Codable, CaseIterable {
     
-    case dom = "Domingo"
-    case seg = "Segunda"
-    case ter = "Terça"
-    case qua = "Quarta"
-    case qui = "Quinta"
-    case sex = "Sexta"
-    case sab = "Sábado"
+    case dom = "Dom"
+    case seg = "Seg"
+    case ter = "Ter"
+    case qua = "Qua"
+    case qui = "Qui"
+    case sex = "Sex"
+    case sab = "Sáb"
     
 }
 
-enum hourAbsences: String, Codable, CaseIterable {
+enum HourAbsences: String, Codable, CaseIterable {
     
     case time1 = "30h"
     case time2 = "45h"
@@ -94,13 +94,12 @@ enum hourAbsences: String, Codable, CaseIterable {
     }
 }
 
-@Model
-class subjectDay {
-    var day: weekDay
+struct SubjectDay: Codable, Hashable {
+    var day: WeekDay
     var startTime: Date
     var endTime: Date
     
-    init(day: weekDay, startTime: Date, endTime: Date) {
+    init(day: WeekDay, startTime: Date, endTime: Date) {
         self.day = day
         self.startTime = startTime
         self.endTime = endTime
@@ -116,12 +115,10 @@ final class Subject {
     var professorName: String
     var professorEmail: String
     var subjectDescription: String
-    
-    @Relationship(deleteRule: .cascade)
-    var subjectSchedule: [subjectDay]
+    var subjectSchedule: [SubjectDay]
     
     var absences: Int
-    var absencesTime: hourAbsences
+    var absencesTime: HourAbsences
     var subjectColor: SubjectColor
     
     init(
@@ -130,9 +127,9 @@ final class Subject {
         professorName: String,
         professorEmail: String,
         subjectDescription: String,
-        subjectSchedule: [subjectDay],
+        subjectSchedule: [SubjectDay],
         absences: Int = 0,
-        absencesTime: hourAbsences,
+        absencesTime: HourAbsences,
         subjectColor: SubjectColor,
     ) {
         self.exams = exams

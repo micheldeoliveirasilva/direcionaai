@@ -12,19 +12,19 @@ import SwiftData
 class ExtracurricularActivity {
     
     var name: String
-    
-    @Relationship(deleteRule: .cascade)
-    var subjectSchedule: [subjectDay]
-
+    var activitySchedule: [SubjectDay]
     var activityDescription: String
+    var activityColor: SubjectColor
     
     init(
         name: String,
-        subjectSchedule: [subjectDay],
-        activityDescription: String
+        activitySchedule: [SubjectDay],
+        activityDescription: String,
+        activityColor: SubjectColor
     ) {
         self.name = name
-        self.subjectSchedule = subjectSchedule
+        self.activitySchedule = activitySchedule
         self.activityDescription = activityDescription
+        self.activityColor = activityColor
     }
 }
