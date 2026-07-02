@@ -55,6 +55,57 @@ enum SubjectColor: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+enum WeekDay: String, Codable, CaseIterable {
+    
+    case dom = "Dom"
+    case seg = "Seg"
+    case ter = "Ter"
+    case qua = "Qua"
+    case qui = "Qui"
+    case sex = "Sex"
+    case sab = "Sáb"
+    
+}
+
+enum HourAbsences: String, Codable, CaseIterable {
+    
+    case time1 = "30h"
+    case time2 = "45h"
+    case time3 = "60h"
+    case time4 = "75h"
+    case time5 = "90h"
+    case time6 = "120h"
+    
+    var totalAbsenses: Int {
+        switch self {
+        case .time1:
+            return 8
+        case .time2:
+            return 13
+        case .time3:
+            return 18
+        case .time4:
+            return 22
+        case .time5:
+            return 26
+        case .time6:
+            return 36
+        }
+    }
+}
+
+struct SubjectDay: Codable, Hashable {
+    var day: WeekDay
+    var startTime: Date
+    var endTime: Date
+    
+    init(day: WeekDay, startTime: Date, endTime: Date) {
+        self.day = day
+        self.startTime = startTime
+        self.endTime = endTime
+    }
+}
+
 @Model
 final class Subject {
     
@@ -64,11 +115,10 @@ final class Subject {
     var professorName: String
     var professorEmail: String
     var subjectDescription: String
+    var subjectSchedule: [SubjectDay]
     
-    var subjectDay: String
-    var startTime: Date
-    var endTime: Date
     var absences: Int
+    var absencesTime: HourAbsences
     var subjectColor: SubjectColor
     
     init(
@@ -77,45 +127,19 @@ final class Subject {
         professorName: String,
         professorEmail: String,
         subjectDescription: String,
-        subjectDay: String,
-        startTime: Date,
-        endTime: Date,
+        subjectSchedule: [SubjectDay],
         absences: Int = 0,
-        subjectColor: SubjectColor
+        absencesTime: HourAbsences,
+        subjectColor: SubjectColor,
     ) {
         self.exams = exams
         self.subjectName = subjectName
         self.professorName = professorName
         self.professorEmail = professorEmail
         self.subjectDescription = subjectDescription
-        self.subjectDay = subjectDay
-        self.startTime = startTime
-        self.endTime = endTime
+        self.subjectSchedule = subjectSchedule
         self.absences = absences
+        self.absencesTime = absencesTime
         self.subjectColor = subjectColor
-    }
-}
-
-@Model
-class ExtracurricularActivity {
-    
-    var name: String
-    var day: String
-    var startTime: Date
-    var endTime: Date
-    var activityDescription: String
-    
-    init(
-        name: String,
-        day: String,
-        startTime: Date,
-        endTime: Date,
-        activityDescription: String
-    ) {
-        self.name = name
-        self.day = day
-        self.startTime = startTime
-        self.endTime = endTime
-        self.activityDescription = activityDescription
     }
 }
