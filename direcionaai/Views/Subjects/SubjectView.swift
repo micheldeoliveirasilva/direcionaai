@@ -14,10 +14,18 @@ struct SubjectView: View {
     
     @Query private var tasks: [UserTask]
     
-    @Binding var S_addTask: Bool
-    @Binding var currentDetent: PresentationDetent
-    
+    // Sheets
+    @State private var showAddTask = false
     @State private var showAddExam = false
+    
+    // Tamanho do sheet de tarefa
+    @State private var currentDetent: PresentationDetent = .medium
+    
+    var subjectTasks: [UserTask] {
+        tasks.filter { task in
+            task.subject == subject
+        }
+    }
     
     var body: some View {
         
@@ -57,11 +65,15 @@ struct SubjectView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text(subject.professorName)
+                    if !subject.professorName.isEmpty {
+                        Text(subject.professorName)
+                    }
                     
-                    Text(subject.professorEmail)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                    if !subject.professorEmail.isEmpty {
+                        Text(subject.professorEmail)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
                 }
                 
                 Divider()
@@ -74,22 +86,30 @@ struct SubjectView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    ForEach(subject.subjectSchedule, id: \.self) { schedule in
+                    if subject.subjectSchedule.isEmpty {
                         
-                        HStack {
-                            
-                            Text(schedule.day.rawValue)
-                                .fontWeight(.medium)
-                            
-                            Spacer()
-                            
-                            Text(
-                                "\(schedule.startTime.formatted(date: .omitted, time: .shortened)) – \(schedule.endTime.formatted(date: .omitted, time: .shortened))"
-                            )
+                        Text("Nenhum horário adicionado.")
                             .foregroundStyle(.secondary)
-                        }
                         
-                        Divider()
+                    } else {
+                        
+                        ForEach(subject.subjectSchedule, id: \.self) { schedule in
+                            
+                            HStack {
+                                
+                                Text(schedule.day.rawValue)
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
+                                
+                                Text(
+                                    "\(schedule.startTime.formatted(date: .omitted, time: .shortened)) – \(schedule.endTime.formatted(date: .omitted, time: .shortened))"
+                                )
+                                .foregroundStyle(.secondary)
+                            }
+                            
+                            Divider()
+                        }
                     }
                 }
                 
@@ -107,14 +127,10 @@ struct SubjectView: View {
                         
                         Button {
                             currentDetent = .medium
-                            S_addTask = true
+                            showAddTask = true
                         } label: {
                             Label("Adicionar", systemImage: "plus")
                         }
-                    }
-                    
-                    let subjectTasks = tasks.filter { task in
-                        task.subject == subject
                     }
                     
                     if subjectTasks.isEmpty {
@@ -148,6 +164,8 @@ struct SubjectView: View {
                 }
                 
                 Divider()
+                
+                // MARK: - Avaliações
                 
                 VStack(alignment: .leading, spacing: 12) {
                     
@@ -254,7 +272,6 @@ struct SubjectView: View {
                             
                             Button {
                                 if subject.absences < subject.absencesTime.totalAbsenses {
-                                    
                                     subject.absences += 1
                                 }
                             } label: {
@@ -291,6 +308,20 @@ struct SubjectView: View {
         }
         .navigationTitle("Disciplina")
         .navigationBarTitleDisplayMode(.inline)
+        
+        // Sheet de tarefa
+        
+        .sheet(isPresented: $showAddTask) {
+            
+            S_Task(actualDetent: $currentDetent)
+                .presentationDetents(
+                    [.medium, .large],
+                    selection: $currentDetent
+                )
+        }
+        
+        // Sheet de avaliação
+        
         .sheet(isPresented: $showAddExam) {
             AddExamView(subject: subject)
         }
@@ -334,9 +365,7 @@ struct SubjectView: View {
                 absences: 10,
                 absencesTime: .time3,
                 subjectColor: .azul
-            ),
-            S_addTask: .constant(false),
-            currentDetent: .constant(.medium)
+            )
         )
     }
     .modelContainer(
