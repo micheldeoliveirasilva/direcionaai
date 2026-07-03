@@ -6,12 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct direcionaaiApp: App {
+    
+    @AppStorage("completeLauch") var completeLaunch: Bool = false
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            
+            if completeLaunch {
+                TabViewStruct()
+            } else {
+                OnboardingView(completeLaunch: $completeLaunch)
+            }
         }
+        .modelContainer(for: [Subject.self, ExtracurricularActivity.self])
     }
 }

@@ -10,71 +10,99 @@ import SwiftUI
 
 struct OnboardingView: View {
     
-    @State private var showNextPage = false
-
+    @Binding var completeLaunch: Bool
+    
     var body: some View {
-        
-        VStack {
-            VStack(alignment: .leading, spacing: 10) {
+        NavigationStack{
+            ZStack {
                 
-                
-                VStack(alignment: .leading, spacing: -5) {
-                    Text("Bem-vindo(a) ao")
-                        .font(Font.largeTitle.bold())
-                    Text("Direciona-Aí")
-                        .font(Font.largeTitle.bold())
-                        .foregroundStyle(Color.blue)
-                }
-                .padding(10)
-                
-                VStack(alignment: .leading) {
-                    Text("\(Image(systemName: "calendar")) Não perca prazos")
-                        .font(Font.title.bold())
-                    
-                    Text("Fique atento aos prazos dos seus trabalhos e avaliações.")
-                        .font(Font.headline)
-                        .fontWeight(Font.Weight.light)
-                        .foregroundStyle(Color.gray)
-                }
-                .padding(10)
+                LinearGradient(
+                    colors: [
+                        Color.blue.opacity(0.60),
+                        Color.blue.opacity(0.1),
+                        Color(.clear)],
+                    startPoint: .top,
+                    endPoint: .center
+                )
+                .ignoresSafeArea()
                 
                 VStack(alignment: .leading) {
+                    Spacer()
+                        .frame(height: 190)
                     
-                    Text("\(Image(systemName: "target")) Registre suas atividades")
-                        .font(Font.title.bold())
-                    Text("Acompanhe seu progresso nas atividades.")
-                        .font(Font.headline)
-                        .fontWeight(Font.Weight.light)
-                        .foregroundStyle(Color.gray)
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Bem-vindo(a) ao")
+                            .font(Font.largeTitle.bold())
+                        
+                        Text("Direciona-Aí")
+                            .font(Font.largeTitle.bold())
+                            .foregroundStyle(Color.blue)
+                    }
+                    Spacer()
+                        .frame(height: 40)
+                    
+                    VStack(spacing: 40) {
+                        
+                        HStack(alignment: .top, spacing: 20){
+                            
+                            Image(systemName: "calendar")
+                                .font(Font.system(size: 23, weight: .bold, design: .rounded))
+                                .foregroundColor(.blue)
+                                .font(.headline)
+                                .frame(width: 30, height: 50)
+                            
+                            VStack(alignment: .leading, spacing: 5){
+                                
+                                Text("Não perca prazos")
+                                    .font(.title3)
+                                    .bold()
+                                
+                                Text("Fique atento aos prazos dos seus trabalhos e avaliações.")
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        
+                        HStack(alignment: .top, spacing: 20){
+                            
+                            Image(systemName: "target")
+                                .font(Font.system(size: 23, weight: .bold, design: .rounded))
+                                .foregroundColor(.blue)
+                                .font(.headline)
+                                .frame(width: 30, height: 50)
+                            
+                            VStack(alignment: .leading, spacing: 5){
+                                
+                                Text("Registre suas atividades")
+                                    .font(.title3)
+                                    .bold()
+                                
+                                Text("Acompanhe o progresso das suas atividades e estudos.")
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        
+                        
+                    }
+                    Spacer()
+                    
+                    NavigationLink {
+                        OnboardingAddSubjectView(completeLaunch: $completeLaunch)
+                    } label: {
+                        Text("Começar")
+                            .font(.title3)
+                            .bold()
+                            .foregroundColor(.white)
+                            .padding(.vertical, 17)
+                            .padding(.horizontal, 119)
+                            .background(.blue)
+                            .clipShape(Capsule())
+                    }
                     
                 }
-                .padding(10)
-                
-            }
-            
-            Button("Continuar"){
-                showNextPage.toggle()
-            }
-            .foregroundStyle(Color.white)
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.capsule)
-            .fullScreenCover(isPresented: $showNextPage) {
-                TabViewStruct()
+                .padding(.horizontal, 35)
             }
         }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .background(
-//            LinearGradient(
-//                colors: [.white, .blue],
-//                startPoint: .topLeading,
-//                endPoint: .bottomTrailing
-//            ))
-//            .ignoresSafeArea()
     }
-    
-    
-}
-
-#Preview {
-    OnboardingView()
 }
