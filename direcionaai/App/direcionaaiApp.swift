@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct direcionaaiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabViewStruct()
+                .modelContainer(
+                    for: [
+                        UserTask.self,
+                        Subject.self,
+                        ExtracurricularActivity.self
+                    ]
+                )
         }
     }
 }

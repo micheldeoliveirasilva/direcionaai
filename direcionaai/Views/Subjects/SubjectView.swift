@@ -253,7 +253,10 @@ struct SubjectView: View {
                                 .frame(height: 24)
                             
                             Button {
-                                subject.absences += 1
+                                if subject.absences < subject.absencesTime.totalAbsenses {
+                                    
+                                    subject.absences += 1
+                                }
                             } label: {
                                 Image(systemName: "plus")
                                     .frame(width: 44, height: 38)

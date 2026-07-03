@@ -78,4 +78,11 @@ TabViewStruct: View {
 
 #Preview {
     TabViewStruct()
+        .modelContainer(
+            for: [
+                UserTask.self,
+                Subject.self,
+                ExtracurricularActivity.self
+            ], inMemory: true
+        )
 }
