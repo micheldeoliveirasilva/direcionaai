@@ -67,7 +67,7 @@ struct OnboardingView: View {
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
-            .opacity(0.5))
+            .opacity(0.3))
             .ignoresSafeArea()
     }
     
