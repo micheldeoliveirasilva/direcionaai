@@ -43,7 +43,7 @@ TabViewStruct: View {
             
             
             Tab("Disciplinas", systemImage: "graduationcap") {
-                SubjectView()
+                SubjectListView()
             }
             
             
@@ -59,11 +59,11 @@ TabViewStruct: View {
                             Button(action: {
                                 selectedTask = task
                             }) {
-                                TaskDetailView(task: task)}
+                                TaskDetail(task: task)}
                         }
                         .navigationTitle("Buscar")
                         .sheet(item: $selectedTask) { showTask in
-                            S_AddTask(actualDetent: $currentDetent)
+                            S_Task(actualDetent: $currentDetent)
                             .presentationDetents([.medium, .large], selection: $currentDetent)
                         }
                     }
