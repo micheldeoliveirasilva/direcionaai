@@ -15,6 +15,9 @@ struct TaskView: View {
     
     
     @Query var tasks: [UserTask]
+    var toDoTasks: [UserTask] { tasks.filter { $0.status == .toDo } }
+    var inProgressTasks: [UserTask] { tasks.filter { $0.status == .inProgress } }
+    var doneTasks: [UserTask] { tasks.filter { $0.status == .done } }
     // busca no swiftData as tasks armazenadas no model UserTask
     
     var body: some View {
@@ -34,14 +37,19 @@ struct TaskView: View {
                         
                         HStack {
                             
-                            
-                            ForEach(tasks) { task in
-                                if task.status == .toDo {
+                            if toDoTasks.isEmpty {
+                                
+                                Text("Nenhuma atividade adicionada.")
+                                    .foregroundStyle(.secondary)
+                                    .padding()
+                                
+                            } else {
+                                
+                                ForEach(toDoTasks) { task in
                                     TaskDetail(task: task)
                                 }
+                                // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
                             }
-                            // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
-                            
                         }
                     }
                 }
@@ -54,12 +62,21 @@ struct TaskView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         
-                        HStack {ForEach(tasks) { task in
-                            if task.status == .inProgress {
-                                TaskDetail(task: task)
-                            }
-                        }
+                        HStack {
                             
+                            if inProgressTasks.isEmpty {
+                                
+                                Text("Nenhuma atividade adicionada.")
+                                    .foregroundStyle(.secondary)
+                                    .padding()
+                                
+                            } else {
+                                
+                                ForEach(inProgressTasks) { task in
+                                    TaskDetail(task: task)
+                                }
+                                
+                            }
                         }
                     }
                 }
@@ -72,12 +89,21 @@ struct TaskView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         
-                        HStack {ForEach(tasks) { task in
-                            if task.status == .done {
-                                TaskDetail(task: task)
-                            }
-                        }
+                        HStack {
                             
+                            if doneTasks.isEmpty {
+                                
+                                Text("Nenhuma atividade adicionada.")
+                                    .foregroundStyle(.secondary)
+                                    .padding()
+                                
+                            } else {
+                                
+                                ForEach(doneTasks) { task in
+                                    TaskDetail(task: task)
+                                }
+
+                            }
                         }
                     }
                 }
