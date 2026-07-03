@@ -14,6 +14,7 @@ struct SubjectView: View {
     
     @State private var showAddExam = false
     
+    
     var body: some View {
         
         ScrollView {
@@ -44,11 +45,7 @@ struct SubjectView: View {
                         
                     }
                     
-                    
                 }
-                
-                
-                
                 
                 Divider()
                 
@@ -194,7 +191,10 @@ struct SubjectView: View {
                                 .frame(height: 24)
                             
                             Button {
-                                subject.absences += 1
+                                if subject.absences < subject.absencesTime.totalAbsenses {
+                                    
+                                    subject.absences += 1
+                                }
                             } label: {
                                 Image(systemName: "plus")
                                     .frame(width: 44, height: 38)
