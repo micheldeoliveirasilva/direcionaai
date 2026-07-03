@@ -1,11 +1,13 @@
 //
-//  S_AddExam.swift
+//  AddExamView.swift
 //  direcionaai
 //
-//  Created by Gabriel Azevedo Amorim Vieira Belo on 25/06/26.
+//  Created by Débora Lemos on 03/07/26.
+//
 //
 
 // Sheet de adicionar avaliação na disciplina
+
 import SwiftUI
 import SwiftData
 
@@ -50,16 +52,16 @@ struct AddExamView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 
-                ToolbarItem(placement: .cancellationAction) {
-                    
-                    Button("Cancelar") {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
                         dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
                     }
                 }
                 
-                ToolbarItem(placement: .confirmationAction) {
-                    
-                    Button("Salvar") {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
                         
                         let newExam = Exams(
                             assesmentsDate: examDate,
@@ -68,19 +70,40 @@ struct AddExamView: View {
                         )
                         
                         subject.exams.append(newExam)
-                        
                         dismiss()
+                        
+                    } label: {
+                        Image(systemName: "checkmark")
                     }
-                    .disabled(
-                        examName
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
-                            .isEmpty
-                    )
                 }
             }
         }
     }
 }
-//#Preview {
-//    S_AddExam()
-//}
+
+#Preview("Nova avaliação") {
+    
+    AddExamView(
+        subject: Subject(
+            exams: [],
+            subjectName: "Fonética e fonologia",
+            professorName: "Maria Silva",
+            professorEmail: "maria@ufpe.br",
+            subjectDescription: "Estudo dos sons da fala.",
+            subjectSchedule: [
+                SubjectDay(
+                    day: .seg,
+                    startTime: .now,
+                    endTime: .now
+                )
+            ],
+            absences: 0,
+            absencesTime: .time3,
+            subjectColor: .azul
+        )
+    )
+    .modelContainer(
+        for: Subject.self,
+        inMemory: true
+    )
+}
