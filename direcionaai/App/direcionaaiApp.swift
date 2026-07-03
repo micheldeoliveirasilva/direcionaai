@@ -10,16 +10,18 @@ import SwiftData
 
 @main
 struct direcionaaiApp: App {
+    
+    @AppStorage("completeLauch") var completeLaunch: Bool = false
+
     var body: some Scene {
         WindowGroup {
-            TabViewStruct()
-                .modelContainer(
-                    for: [
-                        UserTask.self,
-                        Subject.self,
-                        ExtracurricularActivity.self
-                    ]
-                )
+            
+            if completeLaunch {
+                TabViewStruct()
+            } else {
+                OnboardingView(completeLaunch: $completeLaunch)
+            }
         }
+        .modelContainer(for: [Subject.self, ExtracurricularActivity.self])
     }
 }
