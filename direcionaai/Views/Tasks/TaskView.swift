@@ -38,11 +38,25 @@ struct TaskView: View {
                             ForEach(tasks) { task in
                                 if task.status == .toDo {
                                     TaskDetail(task: task)
+                                    .draggable(UserTaskTransfer(id: task.id))
                                 }
                             }
-                            // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
+                                                        // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
                             
                         }
+                    }
+                    .dropDestination(for: UserTaskTransfer.self) { items, location in
+                        
+                        guard let transfer = items.first,
+                              let draggedTask = tasks.first(where: { $0.id == transfer.id }) else {
+                            return false
+                        }
+
+                        withAnimation(.snappy) {
+                            draggedTask.status = .toDo
+                        }
+
+                        return true
                     }
                 }
                 

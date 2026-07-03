@@ -54,7 +54,7 @@ struct TaskDetail: View {
     
     let subject = Subject(exams: [], subjectName: "Matemática", professorName: "", professorEmail: "", subjectDescription: "", subjectSchedule: [], absences: 0, absencesTime: .time1, subjectColor: .vermelho)
     
-    let task = UserTask(taskName: "Fazer lista", priority: .low, subject: subject, dateLimit: .now, notes: "", status: .done)
+    let task = UserTask(id: UUID(), taskName: "Fazer lista", priority: .low, subject: subject, dateLimit: .now, notes: "", status: .done)
         
     TaskDetail(task: task)
 }
