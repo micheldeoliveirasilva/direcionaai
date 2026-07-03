@@ -43,7 +43,7 @@ TabViewStruct: View {
             
             
             Tab("Disciplinas", systemImage: "graduationcap") {
-                SubjectView()
+                SubjectListView()
             }
             
             
