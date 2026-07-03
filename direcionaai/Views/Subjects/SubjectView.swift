@@ -24,12 +24,31 @@ struct SubjectView: View {
                     
                     RoundedRectangle(cornerRadius: 4)
                         .fill(subject.subjectColor.color)
-                        .frame(width: 7, height: 52)
+                        .frame(width: 8, height: 80)
+        
                     
-                    Text(subject.subjectName)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                   VStack {
+                        Text(subject.subjectName)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        
+                        if !subject.subjectDescription.isEmpty {
+                            
+                            
+                            VStack(alignment: .leading, spacing: 10) {
+                                
+                                Text(subject.subjectDescription)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        
+                    }
+                    
+                    
                 }
+                
+                
+                
                 
                 Divider()
                 
@@ -206,22 +225,9 @@ struct SubjectView: View {
                         .frame(maxWidth: .infinity)
                 }
                 
-                if !subject.subjectDescription.isEmpty {
-                    
-                    Divider()
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        
-                        Text("Descrição")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        
-                        Text(subject.subjectDescription)
-                            .foregroundStyle(.secondary)
-                    }
-                }
+                
             }
-            .padding()
+            .padding(20)
         }
         .navigationTitle("Disciplina")
         .navigationBarTitleDisplayMode(.inline)
@@ -231,78 +237,7 @@ struct SubjectView: View {
     }
 }
 
-struct AddExamView: View {
-    
-    @Environment(\.dismiss) private var dismiss
-    
-    @Bindable var subject: Subject
-    
-    @State private var examName = ""
-    @State private var examDate = Date()
-    @State private var examGrade = 0.0
-    
-    var body: some View {
-        
-        NavigationStack {
-            
-            Form {
-                
-                Section("Informações") {
-                    
-                    TextField(
-                        "Nome da avaliação",
-                        text: $examName
-                    )
-                    
-                    DatePicker(
-                        "Data",
-                        selection: $examDate,
-                        displayedComponents: .date
-                    )
-                    
-                    TextField(
-                        "Nota",
-                        value: $examGrade,
-                        format: .number
-                    )
-                    .keyboardType(.decimalPad)
-                }
-            }
-            .navigationTitle("Nova avaliação")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                
-                ToolbarItem(placement: .cancellationAction) {
-                    
-                    Button("Cancelar") {
-                        dismiss()
-                    }
-                }
-                
-                ToolbarItem(placement: .confirmationAction) {
-                    
-                    Button("Salvar") {
-                        
-                        let newExam = Exams(
-                            assesmentsDate: examDate,
-                            assessments: examGrade,
-                            assesmentsName: examName
-                        )
-                        
-                        subject.exams.append(newExam)
-                        
-                        dismiss()
-                    }
-                    .disabled(
-                        examName
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
-                            .isEmpty
-                    )
-                }
-            }
-        }
-    }
-}
+
 
 #Preview("Disciplina") {
     
