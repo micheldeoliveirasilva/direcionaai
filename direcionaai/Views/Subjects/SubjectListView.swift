@@ -25,7 +25,7 @@ struct SubjectListView: View {
             ScrollView {
                 
                 VStack(alignment: .leading, spacing: 32) {
-                                        
+                    
                     VStack(alignment: .leading, spacing: 12) {
                         
                         Text("Disciplinas")
@@ -42,7 +42,9 @@ struct SubjectListView: View {
                             ForEach(subjects) { subject in
                                 
                                 NavigationLink {
+                                    
                                     SubjectView(subject: subject)
+                                    
                                 } label: {
                                     
                                     HStack(spacing: 14) {
@@ -72,7 +74,7 @@ struct SubjectListView: View {
                         }
                     }
                     
-                    // ATIVIDADES EXTRACURRICULARES
+                    // MARK: - Atividades extracurriculares
                     
                     VStack(alignment: .leading, spacing: 12) {
                         
@@ -90,9 +92,11 @@ struct SubjectListView: View {
                             ForEach(extracurricularActivities) { activity in
                                 
                                 NavigationLink {
+                                    
                                     ExtracurricularView(
                                         activity: activity
                                     )
+                                    
                                 } label: {
                                     
                                     HStack(spacing: 14) {
@@ -140,7 +144,6 @@ struct SubjectListView: View {
                 }
             }
             .sheet(isPresented: $showAddSubject) {
-                
                 S_AddSubject()
             }
         }
@@ -152,7 +155,8 @@ struct SubjectListView: View {
         .modelContainer(
             for: [
                 Subject.self,
-                ExtracurricularActivity.self
+                ExtracurricularActivity.self,
+                UserTask.self
             ],
             inMemory: true
         )
