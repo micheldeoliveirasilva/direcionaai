@@ -17,8 +17,6 @@ struct SubjectListView: View {
     private var extracurricularActivities: [ExtracurricularActivity]
     
     @State private var showAddSubject = false
-    @State private var S_addTask = false
-    @State private var currentDetent: PresentationDetent = .medium
     
     var body: some View {
         
@@ -45,11 +43,7 @@ struct SubjectListView: View {
                                 
                                 NavigationLink {
                                     
-                                    SubjectView(
-                                        subject: subject,
-                                        S_addTask: $S_addTask,
-                                        currentDetent: $currentDetent
-                                    )
+                                    SubjectView(subject: subject)
                                     
                                 } label: {
                                     
@@ -80,7 +74,7 @@ struct SubjectListView: View {
                         }
                     }
                     
-                    // ATIVIDADES EXTRACURRICULARES
+                    // MARK: - Atividades extracurriculares
                     
                     VStack(alignment: .leading, spacing: 12) {
                         
