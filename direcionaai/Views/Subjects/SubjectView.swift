@@ -12,6 +12,11 @@ struct SubjectView: View {
     
     @Bindable var subject: Subject
     
+    @Query private var tasks: [UserTask]
+    
+    @Binding var S_addTask: Bool
+    @Binding var currentDetent: PresentationDetent
+    
     @State private var showAddExam = false
     
     var body: some View {
@@ -20,37 +25,31 @@ struct SubjectView: View {
             
             VStack(alignment: .leading, spacing: 28) {
                 
+                // MARK: - Informações da disciplina
+                
                 HStack {
                     
                     RoundedRectangle(cornerRadius: 4)
                         .fill(subject.subjectColor.color)
                         .frame(width: 8, height: 80)
-        
                     
-                   VStack {
+                    VStack(alignment: .leading, spacing: 6) {
+                        
                         Text(subject.subjectName)
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         
                         if !subject.subjectDescription.isEmpty {
                             
-                            
-                            VStack(alignment: .leading, spacing: 10) {
-                                
-                                Text(subject.subjectDescription)
-                                    .foregroundStyle(.secondary)
-                            }
+                            Text(subject.subjectDescription)
+                                .foregroundStyle(.secondary)
                         }
-                        
                     }
-                    
-                    
                 }
                 
-                
-                
-                
                 Divider()
+                
+                // MARK: - Professor
                 
                 VStack(alignment: .leading, spacing: 10) {
                     
@@ -66,6 +65,8 @@ struct SubjectView: View {
                 }
                 
                 Divider()
+                
+                // MARK: - Horários
                 
                 VStack(alignment: .leading, spacing: 12) {
                     
@@ -91,6 +92,62 @@ struct SubjectView: View {
                         Divider()
                     }
                 }
+                
+                // MARK: - Tarefas
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    
+                    HStack {
+                        
+                        Text("Tarefas")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        
+                        Spacer()
+                        
+                        Button {
+                            currentDetent = .medium
+                            S_addTask = true
+                        } label: {
+                            Label("Adicionar", systemImage: "plus")
+                        }
+                    }
+                    
+                    let subjectTasks = tasks.filter { task in
+                        task.subject == subject
+                    }
+                    
+                    if subjectTasks.isEmpty {
+                        
+                        Text("Nenhuma tarefa adicionada.")
+                            .foregroundStyle(.secondary)
+                        
+                    } else {
+                        
+                        ForEach(subjectTasks) { task in
+                            
+                            HStack {
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    
+                                    Text(task.taskName)
+                                        .font(.headline)
+                                    
+                                    Text(task.status.rawValue)
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.vertical, 6)
+                            
+                            Divider()
+                        }
+                    }
+                }
+                
+                Divider()
                 
                 VStack(alignment: .leading, spacing: 12) {
                     
@@ -160,6 +217,8 @@ struct SubjectView: View {
                 
                 Divider()
                 
+                // MARK: - Faltas
+                
                 VStack(alignment: .leading, spacing: 12) {
                     
                     HStack {
@@ -224,8 +283,6 @@ struct SubjectView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                 }
-                
-                
             }
             .padding(20)
         }
@@ -236,8 +293,6 @@ struct SubjectView: View {
         }
     }
 }
-
-
 
 #Preview("Disciplina") {
     
@@ -276,8 +331,16 @@ struct SubjectView: View {
                 absences: 10,
                 absencesTime: .time3,
                 subjectColor: .azul
-            )
+            ),
+            S_addTask: .constant(false),
+            currentDetent: .constant(.medium)
         )
     }
-    .modelContainer(for: Subject.self, inMemory: true)
+    .modelContainer(
+        for: [
+            Subject.self,
+            UserTask.self
+        ],
+        inMemory: true
+    )
 }
