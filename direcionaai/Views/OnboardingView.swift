@@ -34,9 +34,8 @@ struct OnboardingView: View {
                     Text("Fique atento aos prazos dos seus trabalhos e avaliações.")
                         .font(Font.headline)
                         .fontWeight(Font.Weight.light)
-                        .foregroundStyle(Color.gray)
                 }
-                .padding(10)
+                .padding(15)
                 
                 VStack(alignment: .leading) {
                     
@@ -45,7 +44,6 @@ struct OnboardingView: View {
                     Text("Acompanhe seu progresso nas atividades.")
                         .font(Font.headline)
                         .fontWeight(Font.Weight.light)
-                        .foregroundStyle(Color.gray)
                     
                 }
                 .padding(10)
@@ -62,14 +60,15 @@ struct OnboardingView: View {
                 TabViewStruct()
             }
         }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .background(
-//            LinearGradient(
-//                colors: [.white, .blue],
-//                startPoint: .topLeading,
-//                endPoint: .bottomTrailing
-//            ))
-//            .ignoresSafeArea()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+            LinearGradient(
+                colors: [.white, .blue],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .opacity(0.5))
+            .ignoresSafeArea()
     }
     
     
