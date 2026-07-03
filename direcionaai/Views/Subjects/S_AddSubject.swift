@@ -44,7 +44,7 @@ struct S_AddSubject: View {
                 subjectSchedule: schedule,
                 absences: 0,
                 absencesTime: selectedTime,
-                subjectColor: selectedColor,
+                subjectColor: selectedColor
             )
             
             modelContext.insert(newSubject)
