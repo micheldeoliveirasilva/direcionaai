@@ -45,19 +45,23 @@ struct TaskView: View {
                             
                         }
                     }
-                    .dropDestination(for: UserTaskTransfer.self) { items, location in
-                        
-                        guard let transfer = items.first,
-                              let draggedTask = tasks.first(where: { $0.id == transfer.id }) else {
-                            return false
-                        }
-
-                        withAnimation(.snappy) {
-                            draggedTask.status = .toDo
-                        }
-
-                        return true
+                    
+                }
+                .frame(maxWidth: .infinity, minHeight: 180)
+                .contentShape(Rectangle())
+                .dropDestination(for: UserTaskTransfer.self) { items, location in
+                    
+                    guard let transfer = items.first,
+                          let draggedTask = tasks.first(where: { $0.id == transfer.id }) else {
+                        return false
                     }
+
+                    withAnimation(.snappy) {
+                        draggedTask.status = .toDo
+                    }
+                    
+                    print("DROP")
+                    return true
                 }
                 
                 VStack(alignment: .leading) {
@@ -71,11 +75,28 @@ struct TaskView: View {
                         HStack {ForEach(tasks) { task in
                             if task.status == .inProgress {
                                 TaskDetail(task: task)
+                                .draggable(UserTaskTransfer(id: task.id))
                             }
                         }
                             
                         }
                     }
+                }
+                .frame(maxWidth: .infinity, minHeight: 180)
+                .contentShape(Rectangle())
+                .dropDestination(for: UserTaskTransfer.self) { items, location in
+                    
+                    guard let transfer = items.first,
+                          let draggedTask = tasks.first(where: { $0.id == transfer.id }) else {
+                        return false
+                    }
+
+                    withAnimation(.snappy) {
+                        draggedTask.status = .inProgress
+                    }
+                    
+                    print("DROP")
+                    return true
                 }
                 
                 VStack(alignment: .leading) {
@@ -89,11 +110,28 @@ struct TaskView: View {
                         HStack {ForEach(tasks) { task in
                             if task.status == .done {
                                 TaskDetail(task: task)
+                                    .draggable(UserTaskTransfer(id: task.id))
                             }
                         }
                             
                         }
                     }
+                }
+                .frame(maxWidth: .infinity, minHeight: 180)
+                .contentShape(Rectangle())
+                .dropDestination(for: UserTaskTransfer.self) { items, location in
+                    
+                    guard let transfer = items.first,
+                          let draggedTask = tasks.first(where: { $0.id == transfer.id }) else {
+                        return false
+                    }
+
+                    withAnimation(.snappy) {
+                        draggedTask.status = .done
+                    }
+                    
+                    print("DROP")
+                    return true
                 }
                 
             }
@@ -147,4 +185,11 @@ struct TaskView: View {
 #Preview {
     
     TaskView()
+        .modelContainer(
+            for: [
+                Subject.self,
+                UserTask.self
+            ],
+            inMemory: true
+        )
 }

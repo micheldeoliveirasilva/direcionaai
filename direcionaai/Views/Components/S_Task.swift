@@ -44,6 +44,9 @@ struct S_Task: View {
             // Modo Criação
             let newTask = UserTask(id: UUID(), taskName: taskName, priority: selectedPriority, subject: safeSubject, dateLimit: .now, notes: "", status: .toDo)
             modelContext.insert(newTask)
+
+            print("Inseriu:", newTask.taskName)
+            print("Quantidade:", allSubjects.count)
         }
         
         dismiss()

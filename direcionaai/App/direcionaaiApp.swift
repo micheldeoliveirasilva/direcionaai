@@ -22,6 +22,6 @@ struct direcionaaiApp: App {
                 OnboardingView(completeLaunch: $completeLaunch)
             }
         }
-        .modelContainer(for: [Subject.self, ExtracurricularActivity.self])
+        .modelContainer(for: [Subject.self, UserTask.self, ExtracurricularActivity.self])
     }
 }
