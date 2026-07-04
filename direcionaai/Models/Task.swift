@@ -9,6 +9,7 @@
 import Foundation
 import SwiftData
 import SwiftUI
+import UniformTypeIdentifiers
 
 enum Priority: String, Codable, CaseIterable {
     case low = "Baixa"
@@ -37,6 +38,7 @@ enum Status: String, Codable, CaseIterable {
 @Model
 class UserTask {
     
+    var id: UUID
     var taskName: String
     var priority: Priority
     var subject: Subject
@@ -44,7 +46,9 @@ class UserTask {
     var notes: String
     var status: Status
     
+    
     init(
+        id: UUID,
         taskName: String,
         priority: Priority,
         subject: Subject,
@@ -52,6 +56,7 @@ class UserTask {
         notes: String,
         status: Status,
     ) {
+        self.id = id
         self.taskName = taskName
         self.priority = priority
         self.subject = subject
