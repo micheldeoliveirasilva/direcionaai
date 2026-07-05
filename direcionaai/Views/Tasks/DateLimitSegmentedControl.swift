@@ -6,13 +6,36 @@
 //
 
 import SwiftUI
+import SwiftData
+
+enum TaskFilter: String, Codable, CaseIterable {
+
+case all = "Todos"
+case today = "Hoje"
+case week = "Semana"
+case month = "Mês"
+
+}
 
 struct DateLimitSegmentedControl: View {
+
+@Binding var selectedFilter: TaskFilter
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+        
+        Picker("Filtro", selection: $selectedFilter) {
+
+                  ForEach(TaskFilter.allCases, id: \.self) { filter in
+
+                      Text(filter.rawValue)
+                          .tag(filter)
+
+                  }
+
+              }
+              .pickerStyle(.segmented)    }
 }
 
 #Preview {
-    DateLimitSegmentedControl()
+    DateLimitSegmentedControl(selectedFilter: .constant(TaskFilter.all))
 }

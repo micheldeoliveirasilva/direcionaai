@@ -11,6 +11,8 @@ import SwiftData
 import SwiftUI
 import UniformTypeIdentifiers
 
+
+
 enum Priority: String, Codable, CaseIterable {
     case low = "Baixa"
     case medium = "Média"
