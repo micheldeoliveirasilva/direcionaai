@@ -54,6 +54,22 @@ struct TaskView: View {
 
     }
     
+    // filterStatus
+    
+    private var toDoTasks: [UserTask] {
+        tasks.filter { $0.status == .toDo }
+    }
+
+    private var inProgressTasks: [UserTask] {
+        tasks.filter { $0.status == .inProgress }
+    }
+
+    private var doneTasks: [UserTask] {
+        tasks.filter { $0.status == .done }
+    }
+    
+    // remove
+    
     private func removeTask(at offsets: IndexSet) {
         for index in offsets {
             let taskToDelete = tasks[index]
@@ -79,7 +95,7 @@ struct TaskView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         
-                        if tasks.isEmpty {
+                        if toDoTasks.isEmpty {
                             Text("Não há tarefas para fazer.")
                                 .foregroundStyle(.secondary)
                                 .listRowBackground(Color.clear)
@@ -93,8 +109,8 @@ struct TaskView: View {
                             HStack {
                                 
                                 
-                                ForEach(tasks) { task in
-                                    if task.status == .toDo &&
+                                ForEach(toDoTasks) { task in
+                                    if
                                         passesDateFilter(task)  {
                                         TaskDetail(task: task)
                                             .onTapGesture {
@@ -136,7 +152,7 @@ struct TaskView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         
-                        if tasks.isEmpty {
+                        if inProgressTasks.isEmpty {
                             Text("Não há tarefas em andamento.")
                                 .foregroundStyle(.secondary)
                                 .listRowBackground(Color.clear)
@@ -147,8 +163,8 @@ struct TaskView: View {
                         
                         else {
                             
-                            HStack {ForEach(tasks) { task in
-                                if task.status == .inProgress && passesDateFilter(task) {
+                            HStack {ForEach(inProgressTasks) { task in
+                                if  passesDateFilter(task) {
                                     TaskDetail(task: task)
                                         .onTapGesture {
                                                 selectedTask = task
@@ -186,7 +202,7 @@ struct TaskView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         
-                        if tasks.isEmpty {
+                        if doneTasks.isEmpty {
                             Text("Não há tarefas concluídas.")
                                 .foregroundStyle(.secondary)
                                 .listRowBackground(Color.clear)
@@ -197,8 +213,8 @@ struct TaskView: View {
                         
                         else {
                         
-                        HStack {ForEach(tasks) { task in
-                            if task.status == .done &&
+                        HStack {ForEach(doneTasks) { task in
+                            if
                                 passesDateFilter(task)  {
                                 TaskDetail(task: task)
                                     .onTapGesture {
