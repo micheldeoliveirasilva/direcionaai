@@ -13,16 +13,54 @@ struct TaskView: View {
     @State private var S_addTask = false;
     @State private var currentDetent: PresentationDetent = .medium
     
-    
+    @State private var selectedDateFilter: TaskFilter = .all
     @Query var tasks: [UserTask]
     // busca no swiftData as tasks armazenadas no model UserTask
+    
+    func passesDateFilter(_ task: UserTask) -> Bool {
+        
+        print("Filtro:", selectedDateFilter)
+        print("Tarefa:", task.taskName)
+
+        switch selectedDateFilter {
+
+        case .all:
+
+            return true
+
+        case .today:
+
+            return Calendar.current.isDateInToday(task.dateLimit)
+
+        case .week:
+
+            return Calendar.current.isDate(
+                task.dateLimit,
+                equalTo: Date(),
+                toGranularity: .weekOfYear
+            )
+
+        case .month:
+
+            return Calendar.current.isDate(
+                task.dateLimit,
+                equalTo: Date(),
+                toGranularity: .month
+            )
+
+        }
+
+    }
     
     var body: some View {
         
         NavigationStack{
             
-            
             ScrollView {
+                
+                DateLimitSegmentedControl(
+                    selectedFilter: $selectedDateFilter
+                )
                 
                 VStack(alignment: .leading) {
                     Text("Para fazer")
@@ -47,7 +85,8 @@ struct TaskView: View {
                                 
                                 
                                 ForEach(tasks) { task in
-                                    if task.status == .toDo {
+                                    if task.status == .toDo &&
+                                        passesDateFilter(task)  {
                                         TaskDetail(task: task)
                                             .draggable(UserTaskTransfer(id: task.id))
                                     }
@@ -96,7 +135,7 @@ struct TaskView: View {
                         else {
                             
                             HStack {ForEach(tasks) { task in
-                                if task.status == .inProgress {
+                                if task.status == .inProgress && passesDateFilter(task) {
                                     TaskDetail(task: task)
                                         .draggable(UserTaskTransfer(id: task.id))
                                 }
@@ -143,7 +182,8 @@ struct TaskView: View {
                         else {
                         
                         HStack {ForEach(tasks) { task in
-                            if task.status == .done {
+                            if task.status == .done &&
+                                passesDateFilter(task)  {
                                 TaskDetail(task: task)
                                     .draggable(UserTaskTransfer(id: task.id))
                             }
