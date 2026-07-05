@@ -283,10 +283,16 @@ struct SubjectView: View {
                         .clipShape(Capsule())
                     }
                     
-                    ProgressView(
-                        value: Double(subject.absences),
-                        total: Double(subject.absencesTime.totalAbsenses)
-                    )
+   ProgressView(
+    value: Double(subject.absences),
+    total: Double(subject.absencesTime.totalAbsenses)
+)
+.tint(
+    Double(subject.absences)
+    >= Double(subject.absencesTime.totalAbsenses) * 0.7
+    ? .red
+    : .blue
+)
                     
                     HStack {
                         
@@ -299,9 +305,15 @@ struct SubjectView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     
-                    Text("\(subject.absences) faltas registradas")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
+Text("\(subject.absences) faltas registradas")
+    .font(.headline)
+    .foregroundStyle(
+        Double(subject.absences)
+        >= Double(subject.absencesTime.totalAbsenses) * 0.7
+        ? .red
+        : .primary
+    )
+    .frame(maxWidth: .infinity)
                 }
             }
             .padding(20)
