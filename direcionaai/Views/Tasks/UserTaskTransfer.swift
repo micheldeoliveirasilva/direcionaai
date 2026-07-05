@@ -22,5 +22,5 @@ struct UserTaskTransfer: Codable, Transferable {
 }
 
 extension UTType {
-    static let UserTask = UTType(exportedAs: "com.direcionaai.task")
+    static let UserTask = UTType(importedAs: "com.direcionaai.task")
 }
