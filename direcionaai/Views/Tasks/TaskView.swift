@@ -10,9 +10,11 @@ import SwiftUI
 import SwiftData
 
 struct TaskView: View {
+    
+    @Environment(\.modelContext) private var modelContext
     @State private var S_addTask = false;
     @State private var currentDetent: PresentationDetent = .medium
-    
+    @State private var selectedTask: UserTask?
     @State private var selectedDateFilter: TaskFilter = .all
     @Query var tasks: [UserTask]
     // busca no swiftData as tasks armazenadas no model UserTask
@@ -52,6 +54,13 @@ struct TaskView: View {
 
     }
     
+    private func removeTask(at offsets: IndexSet) {
+        for index in offsets {
+            let taskToDelete = tasks[index]
+            modelContext.delete(taskToDelete)
+        }
+    }
+    
     var body: some View {
         
         NavigationStack{
@@ -88,9 +97,13 @@ struct TaskView: View {
                                     if task.status == .toDo &&
                                         passesDateFilter(task)  {
                                         TaskDetail(task: task)
+                                            .onTapGesture {
+                                                    selectedTask = task
+                                                }
                                             .draggable(UserTaskTransfer(id: task.id))
                                     }
                                 }
+
                                 // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
                                 
                             }
@@ -137,6 +150,9 @@ struct TaskView: View {
                             HStack {ForEach(tasks) { task in
                                 if task.status == .inProgress && passesDateFilter(task) {
                                     TaskDetail(task: task)
+                                        .onTapGesture {
+                                                selectedTask = task
+                                            }
                                         .draggable(UserTaskTransfer(id: task.id))
                                 }
                             }
@@ -185,6 +201,9 @@ struct TaskView: View {
                             if task.status == .done &&
                                 passesDateFilter(task)  {
                                 TaskDetail(task: task)
+                                    .onTapGesture {
+                                            selectedTask = task
+                                        }
                                     .draggable(UserTaskTransfer(id: task.id))
                             }
                         }
@@ -251,6 +270,28 @@ struct TaskView: View {
                     .onDisappear{
                         currentDetent = .medium
                     }
+            }
+            
+            .sheet(item: $selectedTask) { task in
+
+                S_Task(
+                    actualDetent: $currentDetent,
+                    existTask: task
+                )
+
+                .presentationDetents(
+                    [.medium, .large],
+                    selection: $currentDetent
+                )
+
+                .presentationDragIndicator(.visible)
+
+                .onDisappear {
+
+                    currentDetent = .medium
+                    selectedTask = nil
+
+                }
             }
             
         }
