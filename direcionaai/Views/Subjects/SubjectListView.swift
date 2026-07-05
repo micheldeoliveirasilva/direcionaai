@@ -57,8 +57,8 @@ struct SubjectListView: View {
                             NavigationLink {
                                 SubjectView(
                                     subject: subject,
-                                    S_addTask: $S_addTask,
-                                    currentDetent: $currentDetent
+//                                    S_addTask: $S_addTask,
+//                                    currentDetent: $currentDetent
                                 )
                                 
                             } label: {

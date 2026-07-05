@@ -32,17 +32,29 @@ struct TaskView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         
-                        HStack {
+                        if tasks.isEmpty {
+                            Text("Não há tarefas para fazer.")
+                                .foregroundStyle(.secondary)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .padding()
                             
+                        }
+                        
+                        else {
                             
-                            ForEach(tasks) { task in
-                                if task.status == .toDo {
-                                    TaskDetail(task: task)
-                                    .draggable(UserTaskTransfer(id: task.id))
+                            HStack {
+                                
+                                
+                                ForEach(tasks) { task in
+                                    if task.status == .toDo {
+                                        TaskDetail(task: task)
+                                            .draggable(UserTaskTransfer(id: task.id))
+                                    }
                                 }
+                                // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
+                                
                             }
-                                                        // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
-                            
                         }
                     }
                     
@@ -72,13 +84,25 @@ struct TaskView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         
-                        HStack {ForEach(tasks) { task in
-                            if task.status == .inProgress {
-                                TaskDetail(task: task)
-                                .draggable(UserTaskTransfer(id: task.id))
-                            }
-                        }
+                        if tasks.isEmpty {
+                            Text("Não há tarefas em andamento.")
+                                .foregroundStyle(.secondary)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .padding()
                             
+                        }
+                        
+                        else {
+                            
+                            HStack {ForEach(tasks) { task in
+                                if task.status == .inProgress {
+                                    TaskDetail(task: task)
+                                        .draggable(UserTaskTransfer(id: task.id))
+                                }
+                            }
+                                
+                            }
                         }
                     }
                 }
@@ -107,11 +131,24 @@ struct TaskView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         
+                        if tasks.isEmpty {
+                            Text("Não há tarefas concluídas.")
+                                .foregroundStyle(.secondary)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .padding()
+                            
+                        }
+                        
+                        else {
+                        
                         HStack {ForEach(tasks) { task in
                             if task.status == .done {
                                 TaskDetail(task: task)
                                     .draggable(UserTaskTransfer(id: task.id))
                             }
+                        }
+                            
                         }
                             
                         }
