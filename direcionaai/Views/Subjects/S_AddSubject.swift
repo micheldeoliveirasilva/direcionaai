@@ -185,21 +185,17 @@ struct S_AddSubject: View {
                 }
                 
                 Section(header: Text("Detalhes")) {
-                
+                    
                     Picker("Cor", selection: $selectedColor) {
                         ForEach(SubjectColor.allCases, id: \.self) {
                             Text($0.rawValue.capitalized).tag($0)
                         }
                     }
                     .pickerStyle(.menu)
-                    
-                    VStack(alignment: .leading) {
-                        Text("Descrição")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                        TextEditor(text: $description)
-                            .frame(height: 50)
-                    }
+                }
+                Section(header: Text("Descrição")) {
+                    TextEditor(text: $description)
+                        .frame(height: 100)
                 }
             }
             .toolbar {
