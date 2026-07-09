@@ -54,16 +54,42 @@ TabViewStruct: View {
                         ContentUnavailableView.search(text: searchText)
                     } else {
                         
-                        List(filteredTasks) { task in
+                        List{
                             
-                            Button(action: {
-                                selectedTask = task
-                            }) {
-                                TaskDetail(task: task)}
+                            if !searchText.isEmpty {
+                                HStack{
+                                    
+                                    Text("Atividades")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                        .listRowBackground(Color.clear)
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(filteredTasks.count) Encontradas")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                        .listRowBackground(Color.clear)
+                                }
+                            }
+                            
+                            ForEach(filteredTasks) { task in
+                                
+                                Button(action: {
+                                    selectedTask = task
+                                }) {
+                                    TaskDetail(task: task)
+                                        .frame(height: 100)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            
                         }
+                        .listStyle(.insetGrouped)
                         .navigationTitle("Buscar")
                         .sheet(item: $selectedTask) { showTask in
-                            S_Task(actualDetent: $currentDetent)
+                            
+                            S_Task(actualDetent: $currentDetent, existTask: showTask)
                             .presentationDetents([.medium, .large], selection: $currentDetent)
                         }
                     }

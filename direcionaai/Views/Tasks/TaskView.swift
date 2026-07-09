@@ -23,35 +23,35 @@ struct TaskView: View {
         
         print("Filtro:", selectedDateFilter)
         print("Tarefa:", task.taskName)
-
+        
         switch selectedDateFilter {
-
+            
         case .all:
-
+            
             return true
-
+            
         case .today:
-
+            
             return Calendar.current.isDateInToday(task.dateLimit)
-
+            
         case .week:
-
+            
             return Calendar.current.isDate(
                 task.dateLimit,
                 equalTo: Date(),
                 toGranularity: .weekOfYear
             )
-
+            
         case .month:
-
+            
             return Calendar.current.isDate(
                 task.dateLimit,
                 equalTo: Date(),
                 toGranularity: .month
             )
-
+            
         }
-
+        
     }
     
     // filterStatus
@@ -59,11 +59,11 @@ struct TaskView: View {
     private var toDoTasks: [UserTask] {
         tasks.filter { $0.status == .toDo }
     }
-
+    
     private var inProgressTasks: [UserTask] {
         tasks.filter { $0.status == .inProgress }
     }
-
+    
     private var doneTasks: [UserTask] {
         tasks.filter { $0.status == .done }
     }
@@ -114,12 +114,15 @@ struct TaskView: View {
                                         passesDateFilter(task)  {
                                         TaskDetail(task: task)
                                             .onTapGesture {
-                                                    selectedTask = task
-                                                }
+                                                selectedTask = task
+                                            }
+                                            .frame(width: 150, height: 100)
+                                            .background(Color(.systemGray6))
+                                            .cornerRadius(12)
                                             .draggable(UserTaskTransfer(id: task.id))
                                     }
                                 }
-
+                                
                                 // percore e cria cada task exibindo dentro do molde criado em TaskDetailView e filtrando pelo status
                                 
                             }
@@ -135,7 +138,7 @@ struct TaskView: View {
                           let draggedTask = tasks.first(where: { $0.id == transfer.id }) else {
                         return false
                     }
-
+                    
                     withAnimation(.snappy) {
                         draggedTask.status = .toDo
                     }
@@ -167,8 +170,11 @@ struct TaskView: View {
                                 if  passesDateFilter(task) {
                                     TaskDetail(task: task)
                                         .onTapGesture {
-                                                selectedTask = task
-                                            }
+                                            selectedTask = task
+                                        }
+                                        .frame(width: 150, height: 100)
+                                        .background(Color(.systemGray6))
+                                        .cornerRadius(12)
                                         .draggable(UserTaskTransfer(id: task.id))
                                 }
                             }
@@ -185,7 +191,7 @@ struct TaskView: View {
                           let draggedTask = tasks.first(where: { $0.id == transfer.id }) else {
                         return false
                     }
-
+                    
                     withAnimation(.snappy) {
                         draggedTask.status = .inProgress
                     }
@@ -212,19 +218,22 @@ struct TaskView: View {
                         }
                         
                         else {
-                        
-                        HStack {ForEach(doneTasks) { task in
-                            if
-                                passesDateFilter(task)  {
-                                TaskDetail(task: task)
-                                    .onTapGesture {
+                            
+                            HStack {ForEach(doneTasks) { task in
+                                if
+                                    passesDateFilter(task)  {
+                                    TaskDetail(task: task)
+                                        .onTapGesture {
                                             selectedTask = task
                                         }
-                                    .draggable(UserTaskTransfer(id: task.id))
+                                        .frame(width: 150, height: 100)
+                                        .background(Color(.systemGray6))
+                                        .cornerRadius(12)
+                                        .draggable(UserTaskTransfer(id: task.id))
+                                }
                             }
-                        }
-                            
-                        }
+                                
+                            }
                             
                         }
                     }
@@ -289,24 +298,24 @@ struct TaskView: View {
             }
             
             .sheet(item: $selectedTask) { task in
-
+                
                 S_Task(
                     actualDetent: $currentDetent,
                     existTask: task
                 )
-
+                
                 .presentationDetents(
                     [.medium, .large],
                     selection: $currentDetent
                 )
-
+                
                 .presentationDragIndicator(.visible)
-
+                
                 .onDisappear {
-
+                    
                     currentDetent = .medium
                     selectedTask = nil
-
+                    
                 }
             }
             

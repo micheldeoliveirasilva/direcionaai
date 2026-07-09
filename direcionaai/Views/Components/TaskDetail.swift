@@ -44,8 +44,9 @@ struct TaskDetail: View {
                 }
                 
             }
-            .frame(width: 150, height: 100, alignment: .leading)
-
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            
         }
     }
     
@@ -54,7 +55,7 @@ struct TaskDetail: View {
     
     let subject = Subject(exams: [], subjectName: "Matemática", professorName: "", professorEmail: "", subjectDescription: "", subjectSchedule: [], absences: 0, absencesTime: .time1, subjectColor: .vermelho)
     
-    let task = UserTask(id: UUID(), taskName: "Fazer lista", priority: .low, subject: subject, dateLimit: .now, notes: "", status: .done)
+    let task = UserTask(id: UUID(), taskName: "Fazer lista", priority: .low, subject: subject, dateLimit: .now, notes: "Atividade de Máximos e Mínimos", status: .done)
         
     TaskDetail(task: task)
 }
