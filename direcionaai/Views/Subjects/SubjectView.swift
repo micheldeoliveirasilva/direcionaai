@@ -10,6 +10,7 @@ import SwiftData
 
 struct SubjectView: View {
     
+    @Environment(\.modelContext) private var modelContext
     @Bindable var subject: Subject
     
     @Query private var tasks: [UserTask]
@@ -20,6 +21,7 @@ struct SubjectView: View {
     
     // Tamanho do sheet de tarefa
     @State private var currentDetent: PresentationDetent = .medium
+    @State private var editingTask: UserTask? = nil
     
     var subjectTasks: [UserTask] {
         tasks.filter { task in
@@ -59,20 +61,26 @@ struct SubjectView: View {
                 
                 // MARK: - Professor
                 
-                VStack(alignment: .leading, spacing: 10) {
+                if !subject.professorName.isEmpty || !subject.professorEmail.isEmpty {
                     
-                    Text("Professor")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    
-                    if !subject.professorName.isEmpty {
-                        Text(subject.professorName)
-                    }
-                    
-                    if !subject.professorEmail.isEmpty {
-                        Text(subject.professorEmail)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        if !subject.professorName.isEmpty{
+                            Text("Professor")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            
+                            Text(subject.professorName)
+                        }
+                        
+                        if !subject.professorEmail.isEmpty {
+                            Text("Email")
+                                .font(.caption)
+                            
+                            Text(subject.professorEmail)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
                 
@@ -93,23 +101,29 @@ struct SubjectView: View {
                         
                     } else {
                         
-                        ForEach(subject.subjectSchedule, id: \.self) { schedule in
+                        List{
+                            ForEach(subject.subjectSchedule, id: \.self) { schedule in
+                                
+                                HStack {
+                                    
+                                    Text(schedule.day.rawValue)
+                                        .fontWeight(.medium)
+                                    
+                                    Spacer()
+                                    
+                                    Text(
+                                        "\(schedule.startTime.formatted(date: .omitted, time: .shortened)) – \(schedule.endTime.formatted(date: .omitted, time: .shortened))"
+                                    )
+                                    .foregroundStyle(.secondary)
+                                }
+                                .listRowBackground(Color.clear)
+                                .listRowInsets(EdgeInsets())
                             
-                            HStack {
-                                
-                                Text(schedule.day.rawValue)
-                                    .fontWeight(.medium)
-                                
-                                Spacer()
-                                
-                                Text(
-                                    "\(schedule.startTime.formatted(date: .omitted, time: .shortened)) – \(schedule.endTime.formatted(date: .omitted, time: .shortened))"
-                                )
-                                .foregroundStyle(.secondary)
                             }
-                            
-                            Divider()
                         }
+                        .listStyle(.plain)
+                        .scrollDisabled(true)
+                        .frame(height: CGFloat(subject.subjectSchedule.count * 55))
                     }
                 }
                 
@@ -140,29 +154,47 @@ struct SubjectView: View {
                         
                     } else {
                         
-                        ForEach(subjectTasks) { task in
-                            
-                            HStack {
+                        List{
+                            ForEach(subjectTasks) { task in
                                 
-                                VStack(alignment: .leading, spacing: 4) {
+                                HStack {
                                     
-                                    Text(task.taskName)
-                                        .font(.headline)
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        
+                                        Text(task.taskName)
+                                            .font(.headline)
+                                        
+                                        Text(task.status.rawValue)
+                                            .font(.subheadline)
+                                            .foregroundStyle(.secondary)
+                                    }
                                     
-                                    Text(task.status.rawValue)
-                                        .font(.subheadline)
-                                        .foregroundStyle(.secondary)
+                                    Spacer()
                                 }
+                                .onTapGesture {
+                                    editingTask = task
+                                }
+                                .listRowBackground(Color.clear)
+                                .listRowInsets(EdgeInsets())
+                                .padding(.vertical, 6)
                                 
-                                Spacer()
                             }
-                            .padding(.vertical, 6)
-                            
-                            Divider()
+                            .onDelete { indexSet in
+                                for index in indexSet {
+                                        let taskToDelete = subjectTasks[index]
+                                        modelContext.delete(taskToDelete)
+                                    }
+                                    
+                                    try? modelContext.save()
+                            }
                         }
+                        .listStyle(.plain)
+                        .frame(height: CGFloat(subject.subjectSchedule.count * 150))
                     }
                 }
-                
+                .sheet(item: $editingTask) { task in
+                    S_Task(actualDetent: $currentDetent, existTask: task)
+                }
                 Divider()
                 
                 // MARK: - Avaliações
@@ -190,46 +222,53 @@ struct SubjectView: View {
                             .foregroundStyle(.secondary)
                         
                     } else {
-                        
-                        ForEach(
-                            Array(subject.exams.enumerated()),
-                            id: \.offset
-                        ) { _, exam in
+                        List{
                             
-                            VStack(spacing: 10) {
+                            ForEach( Array(subject.exams.enumerated()), id: \.offset) { index, exam in
                                 
-                                HStack {
+                                VStack(spacing: 10) {
                                     
-                                    VStack(alignment: .leading, spacing: 4) {
+                                    HStack {
                                         
-                                        Text(exam.assesmentsName)
-                                            .fontWeight(.medium)
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            
+                                            Text(exam.assesmentsName)
+                                                .fontWeight(.medium)
+                                            
+                                            Text(
+                                                exam.assesmentsDate.formatted(
+                                                    date: .abbreviated,
+                                                    time: .omitted
+                                                )
+                                            )
+                                            .font(.footnote)
+                                            .foregroundStyle(.secondary)
+                                        }
+                                        
+                                        Spacer()
                                         
                                         Text(
-                                            exam.assesmentsDate.formatted(
-                                                date: .abbreviated,
-                                                time: .omitted
+                                            exam.assessments,
+                                            format: .number.precision(
+                                                .fractionLength(1)
                                             )
                                         )
-                                        .font(.footnote)
-                                        .foregroundStyle(.secondary)
+                                        .font(.title3)
+                                        .foregroundStyle(.blue)
                                     }
                                     
-                                    Spacer()
-                                    
-                                    Text(
-                                        exam.assessments,
-                                        format: .number.precision(
-                                            .fractionLength(1)
-                                        )
-                                    )
-                                    .font(.title3)
-                                    .foregroundStyle(.blue)
                                 }
-                                
-                                Divider()
+                                .listRowBackground(Color.clear)
+                                .listRowInsets(EdgeInsets())
+                                .padding(.vertical, 6)
+                            }
+                            .onDelete { indexSet in
+                                subject.exams.remove(atOffsets: indexSet)
                             }
                         }
+                        .listStyle(.plain)
+                        .scrollDisabled(true)
+                        .frame(height: CGFloat(subject.exams.count * 80))
                     }
                 }
                 
