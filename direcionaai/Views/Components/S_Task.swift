@@ -22,9 +22,8 @@ struct S_Task: View {
     @State private var taskName = ""
     @State private var selectedSubject: Subject?
     @State private var selectedPriority: Priority = .medium
+    @State private var selectedstatus: Status = .toDo
     @State private var dateLimit = Date()
-    
-    let subjects = ["Teste", "Teste 2"]
     
     //MARK: Variáveis do formulário (large)
     @State private var notes = ""
@@ -44,12 +43,17 @@ struct S_Task: View {
             // Modo Criação
             let newTask = UserTask(id: UUID(), taskName: taskName, priority: selectedPriority, subject: safeSubject, dateLimit: dateLimit, notes: "", status: .toDo)
             modelContext.insert(newTask)
-
+            
             print("Inseriu:", newTask.taskName)
             print("Quantidade:", allSubjects.count)
         }
         
         dismiss()
+    }
+    
+    //MARK: Função de apagar task
+    private func deleteTask(_ task: UserTask) {
+        modelContext.delete(task)
     }
     
     var body: some View {
@@ -78,6 +82,14 @@ struct S_Task: View {
                 }
                 
                 if actualDetent == .large {
+                    
+                    Picker("Status", selection: $selectedstatus) {
+                        ForEach(Status.allCases, id: \.self) {
+                            Text($0.rawValue.capitalized).tag($0)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    
                     Section(header: Text("Informações adicionais")) {
                         VStack(alignment: .leading) {
                             Text("Notas adicionais")
@@ -99,6 +111,18 @@ struct S_Task: View {
                                 Spacer()
                             }
                         }
+                        
+                        Button(role: .destructive) {
+                            deleteTask(task)
+                            dismiss()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Excluir Nota")
+                                Spacer()
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
                     }
                 }
             }
