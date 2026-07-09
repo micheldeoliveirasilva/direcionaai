@@ -8,21 +8,44 @@
 
 // TELA DA ATIVIDADES ARQUIVADAS
 import SwiftUI
+import SwiftData
 
 struct ArchTasksView: View {
+    
+    @Query var tasks: [UserTask]
+    @State private var selectedTask: UserTask?
+    @State private var currentDetent: PresentationDetent = .medium
+    
+    private var toDoTasks: [UserTask] {
+        tasks.filter { $0.status == .archived }
+    }
+    
     var body: some View {
-      
+        
         ScrollView {
-            VStack(alignment: .leading) {
-                Text("Arquivados")
+            
+            HStack {
+                
+                ForEach(toDoTasks) { task in
                     
+                    TaskDetail(task: task)
+                        .onTapGesture {
+                            selectedTask = task
+                        }
+                        .frame(width: 150, height: 100)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(12)
+                }
+                
             }
             
         }
         .padding(10)
         .navigationTitle("Arquivados")
         .navigationBarTitleDisplayMode(.inline)
-        
+        .sheet(item: $selectedTask) { task in
+            S_Task(actualDetent: $currentDetent, existTask: task)
+        }
     }
 }
 
