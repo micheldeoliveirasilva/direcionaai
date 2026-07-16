@@ -109,9 +109,10 @@ struct OnboardingAddSubjectView: View {
                     showSheet.toggle()
                 }) {
                     Label("Adicionar disciplina", systemImage: "plus")
+                        .bold()
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue.opacity(0.1))
+                        .background(Color.blue.opacity(0.4))
                         .cornerRadius(10)
                 }
                 .padding(.horizontal)
@@ -126,8 +127,8 @@ struct OnboardingAddSubjectView: View {
                     .bold()
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(subjects.isEmpty ? Color.gray : Color.blue)
-                    .foregroundColor(.white)
+                    .background(subjects.isEmpty ? Color.gray.opacity(0.15) : Color.blue)
+                    .foregroundColor(subjects.isEmpty ? .secondary : .white)
                     .cornerRadius(10)
             }
             .disabled(subjects.isEmpty)

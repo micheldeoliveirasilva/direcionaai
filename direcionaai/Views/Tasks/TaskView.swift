@@ -260,7 +260,7 @@ struct TaskView: View {
             .navigationTitle("Tarefas")
             .toolbar{
                 
-                ToolbarItem(placement: .topBarTrailing){
+                ToolbarItem(placement: .topBarLeading){
                     NavigationLink{
                         ArchTasksView()
                     } label : {
@@ -269,7 +269,7 @@ struct TaskView: View {
                     
                 }
                 
-                ToolbarSpacer(.flexible, placement: .topBarTrailing)
+//                ToolbarSpacer(.flexible, placement: .topBarTrailing)
                 
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
@@ -279,13 +279,13 @@ struct TaskView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .topBarLeading){
-                    Button(action: {
-                        print("Visualizar lembretes")
-                    }) {
-                        Label("Lembretes", systemImage: "bell.fill")
-                    }
-                }
+//                ToolbarItem(placement: .topBarLeading){
+//                    Button(action: {
+//                        print("Visualizar lembretes")
+//                    }) {
+//                        Label("Lembretes", systemImage: "bell.fill")
+//                    }
+//                }
             }
             .sheet(isPresented: $S_addTask) {
                 

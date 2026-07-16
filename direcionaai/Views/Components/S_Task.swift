@@ -15,12 +15,13 @@ struct S_Task: View {
     @Binding var actualDetent: PresentationDetent // Captura o tamanho da sheet
     
     @Query var allSubjects: [Subject] // Captura as disciplinas salvas
+    @Query var allActivities: [ExtracurricularActivity]
     
     var existTask: UserTask?
     
     //MARK: Variáveis do formulário (medium)
     @State private var taskName = ""
-    @State private var selectedSubject: Subject?
+    @State private var selectedSubject: TaskSubject?
     @State private var selectedPriority: Priority = .medium
     @State private var selectedstatus: Status = .toDo
     @State private var dateLimit = Date()
@@ -30,18 +31,42 @@ struct S_Task: View {
     
     //MARK: Função de salvar
     private func saveTask() {
+        
         guard let safeSubject = selectedSubject else { return }
+
+        let subjectToSave: Subject?
+        let activityToSave: ExtracurricularActivity?
+        
+        switch safeSubject {
+        case .subject(let s):
+            subjectToSave = s
+            activityToSave = nil
+        case .activity(let a):
+            subjectToSave = nil
+            activityToSave = a
+        }
         
         if let task = existTask {
             // Modo Edição
             task.taskName = taskName
             task.priority = selectedPriority
-            task.subject = safeSubject
+            task.subject = subjectToSave
+            task.activity = activityToSave
             task.dateLimit = dateLimit
             task.notes = notes
+            
         } else {
             // Modo Criação
-            let newTask = UserTask(id: UUID(), taskName: taskName, priority: selectedPriority, subject: safeSubject, dateLimit: dateLimit, notes: "", status: .toDo)
+            let newTask = UserTask(
+                id: UUID(),
+                taskName: taskName,
+                priority: selectedPriority,
+                subject: subjectToSave,
+                activity: activityToSave,
+                dateLimit: dateLimit,
+                notes: notes,
+                status: .toDo
+            )
             modelContext.insert(newTask)
             
             print("Inseriu:", newTask.taskName)
@@ -70,11 +95,22 @@ struct S_Task: View {
                     .pickerStyle(.segmented)
                     
                     Picker("Disciplina", selection: $selectedSubject) {
-                        Text("Selecione uma disciplina").tag(nil as Subject?)
+                        Text("Selecione uma disciplina").tag(nil as TaskSubject?)
                         
-                        ForEach(allSubjects) { subject in
-                            Text(subject.subjectName).tag(subject as Subject?)
+                        Section(header: Text("Disciplinas")) {
+                            ForEach(allSubjects) { subject in
+                                Text(subject.subjectName)
+                                    .tag(TaskSubject.subject(subject) as TaskSubject?)
+                            }
                         }
+                        
+                        Section(header: Text("Extracurriculares")) {
+                            ForEach(allActivities) { activity in
+                                Text(activity.name)
+                                    .tag(TaskSubject.activity(activity) as TaskSubject?)
+                            }
+                        }
+                        
                     }
                     .pickerStyle(.menu)
                     
@@ -130,12 +166,24 @@ struct S_Task: View {
                 if let task = existTask {
                     taskName = task.taskName
                     self.selectedPriority = task.priority
-                    self.selectedSubject = task.subject
+                    
+                    if let sub = task.subject {
+                        self.selectedSubject = .subject(sub)
+                    } else if let act = task.activity {
+                        self.selectedSubject = .activity(act)
+                    } else {
+                        self.selectedSubject = nil
+                    }
+                    
                     dateLimit = task.dateLimit
                     notes = task.notes
                 }
                 else {
-                    self.selectedSubject = allSubjects.first
+                    if let firstSubject = allSubjects.first {
+                        self.selectedSubject = .subject(firstSubject)
+                    } else {
+                        self.selectedSubject = nil
+                    }
                 }
             }
             .toolbar {

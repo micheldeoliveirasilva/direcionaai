@@ -37,23 +37,49 @@ enum Status: String, Codable, CaseIterable {
     case archived = "Arquivada"
 }
 
+enum TaskSubject: Hashable {
+    case subject(Subject)
+    case activity(ExtracurricularActivity)
+    
+    var name: String {
+            switch self {
+            case .subject(let subject):
+                return subject.subjectName
+            case .activity(let activity):
+                return activity.name
+            }
+        }
+    
+    var color: Color {
+            switch self {
+            case .subject(let subject):
+                return subject.subjectColor.color
+                
+            case .activity(let activity):
+                return activity.activityColor.color
+            }
+        }
+}
+
 @Model
 class UserTask {
     
     var id: UUID
     var taskName: String
     var priority: Priority
-    var subject: Subject
     var dateLimit: Date
     var notes: String
     var status: Status
     
+    var subject: Subject?
+    var activity: ExtracurricularActivity?
     
     init(
         id: UUID,
         taskName: String,
         priority: Priority,
-        subject: Subject,
+        subject: Subject? = nil,
+        activity: ExtracurricularActivity? = nil,
         dateLimit: Date,
         notes: String,
         status: Status,

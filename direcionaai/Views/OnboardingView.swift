@@ -34,7 +34,7 @@ struct OnboardingView: View {
                         Text("Bem-vindo(a) ao")
                             .font(Font.largeTitle.bold())
                         
-                        Text("Direciona-Aí")
+                        Text("OneTask")
                             .font(Font.largeTitle.bold())
                             .foregroundStyle(Color.blue)
                     }
