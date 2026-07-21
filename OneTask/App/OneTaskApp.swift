@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct direcionaaiApp: App {
+struct OneTaskApp: App {
     
     @AppStorage("completeLauch") var completeLaunch: Bool = false
 
@@ -22,6 +22,6 @@ struct direcionaaiApp: App {
                 OnboardingView(completeLaunch: $completeLaunch)
             }
         }
-        .modelContainer(for: [Subject.self, UserTask.self, ExtracurricularActivity.self])
+        .modelContainer(for: [Subject.self, userTask.self, ExtracurricularActivity.self])
     }
 }

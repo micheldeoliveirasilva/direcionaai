@@ -14,12 +14,12 @@ struct TaskView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var S_addTask = false;
     @State private var currentDetent: PresentationDetent = .medium
-    @State private var selectedTask: UserTask?
+    @State private var selectedTask: userTask?
     @State private var selectedDateFilter: TaskFilter = .all
-    @Query var tasks: [UserTask]
+    @Query var tasks: [userTask]
     // busca no swiftData as tasks armazenadas no model UserTask
     
-    func passesDateFilter(_ task: UserTask) -> Bool {
+    func passesDateFilter(_ task: userTask) -> Bool {
         
         print("Filtro:", selectedDateFilter)
         print("Tarefa:", task.taskName)
@@ -56,15 +56,15 @@ struct TaskView: View {
     
     // filterStatus
     
-    private var toDoTasks: [UserTask] {
+    private var toDoTasks: [userTask] {
         tasks.filter { $0.status == .toDo }
     }
     
-    private var inProgressTasks: [UserTask] {
+    private var inProgressTasks: [userTask] {
         tasks.filter { $0.status == .inProgress }
     }
     
-    private var doneTasks: [UserTask] {
+    private var doneTasks: [userTask] {
         tasks.filter { $0.status == .done }
     }
     
@@ -331,7 +331,7 @@ struct TaskView: View {
         .modelContainer(
             for: [
                 Subject.self,
-                UserTask.self
+                userTask.self
             ],
             inMemory: true
         )

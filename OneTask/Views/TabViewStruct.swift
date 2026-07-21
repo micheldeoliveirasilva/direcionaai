@@ -17,13 +17,13 @@ TabViewStruct: View {
     @State private var searchText = ""
     
     // Visualizar task
-    @State private var selectedTask: UserTask? = nil
+    @State private var selectedTask: userTask? = nil
     @State private var currentDetent: PresentationDetent = .medium
     
     // Filtar tasks
-    @Query var tasks: [UserTask]
+    @Query var tasks: [userTask]
     
-    var filteredTasks: [UserTask] {
+    var filteredTasks: [userTask] {
         if searchText.isEmpty {
             return []
         } else {
@@ -106,7 +106,7 @@ TabViewStruct: View {
     TabViewStruct()
         .modelContainer(
             for: [
-                UserTask.self,
+                userTask.self,
                 Subject.self,
                 ExtracurricularActivity.self
             ], inMemory: true

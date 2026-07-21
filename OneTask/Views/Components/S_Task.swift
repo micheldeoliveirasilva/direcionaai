@@ -17,7 +17,7 @@ struct S_Task: View {
     @Query var allSubjects: [Subject] // Captura as disciplinas salvas
     @Query var allActivities: [ExtracurricularActivity]
     
-    var existTask: UserTask?
+    var existTask: userTask?
     
     //MARK: Variáveis do formulário (medium)
     @State private var taskName = ""
@@ -57,7 +57,7 @@ struct S_Task: View {
             
         } else {
             // Modo Criação
-            let newTask = UserTask(
+            let newTask = userTask(
                 id: UUID(),
                 taskName: taskName,
                 priority: selectedPriority,
@@ -77,7 +77,7 @@ struct S_Task: View {
     }
     
     //MARK: Função de apagar task
-    private func deleteTask(_ task: UserTask) {
+    private func deleteTask(_ task: userTask) {
         modelContext.delete(task)
     }
     

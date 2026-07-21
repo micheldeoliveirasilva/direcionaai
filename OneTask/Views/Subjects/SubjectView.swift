@@ -13,7 +13,7 @@ struct SubjectView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var subject: Subject
     
-    @Query private var tasks: [UserTask]
+    @Query private var tasks: [userTask]
     
     // Sheets
     @State private var showAddTask = false
@@ -21,9 +21,9 @@ struct SubjectView: View {
     
     // Tamanho do sheet de tarefa
     @State private var currentDetent: PresentationDetent = .medium
-    @State private var editingTask: UserTask? = nil
+    @State private var editingTask: userTask? = nil
     
-    var subjectTasks: [UserTask] {
+    var subjectTasks: [userTask] {
         tasks.filter { task in
             task.subject == subject
         }
@@ -422,7 +422,7 @@ Text("\(subject.absences) faltas registradas")
     .modelContainer(
         for: [
             Subject.self,
-            UserTask.self
+            userTask.self
         ],
         inMemory: true
     )

@@ -1,4 +1,4 @@
-# 🎯 direcionaai — Task Tracker Universitário
+# 🎯 OneTask — Task Tracker Universitário
 
 > Um aplicativo em SwiftUI desenvolvido para ajudar estudantes universitários a gerenciarem suas matérias, tarefas, exames e horários de forma centralizada e intuitiva.
 
@@ -6,7 +6,7 @@
 
 ## 📝 Sobre o Projeto
 
-O **direcionaai** nasceu da necessidade de centralizar a rotina acadêmica. Sabemos que a vida universitária é um caos de prazos, matérias e notas. Este app foi desenhado com foco na experiência do usuário (UX) para garantir que o estudante consiga registrar e visualizar seus compromissos acadêmicos sem atritos, utilizando o que há de mais moderno no ecossistema Apple com **SwiftUI**.
+O **OneTask** nasceu da necessidade de centralizar a rotina acadêmica. Sabemos que a vida universitária é um caos de prazos, matérias e notas. Este app foi desenhado com foco na experiência do usuário (UX) para garantir que o estudante consiga registrar e visualizar seus compromissos acadêmicos sem atritos, utilizando o que há de mais moderno no ecossistema Apple com **SwiftUI**.
 
 ### ✨ Funcionalidades Principais
 * **Gerenciamento de Matérias:** Cadastro e visualização de disciplinas do semestre.
@@ -21,56 +21,65 @@ O **direcionaai** nasceu da necessidade de centralizar a rotina acadêmica. Sabe
 Abaixo está a organização dos arquivos do projeto, seguindo o padrão de arquitetura focado na separação de Modelos e Views do SwiftUI:
 
 ```text
-direcionaai/
-├── direcionaai/
-│   ├── App/                        # Ciclo de vida e configurações globais do app
-│   ├── Models/                     # Estruturas de dados
-│   │   ├── Schedule.swift          # Modelo de Horários/Cronograma
-│   │   ├── Subject.swift           # Modelo de Matérias/Disciplinas
-│   │   └── Task.swift              # Modelo de Tarefas
-│   ├── Views/                      # Telas e Componentes visuais
-│   │   ├── Components/             # Subvisões e componentes reutilizáveis
-│   │   │   ├── S_AddTask.swift     # Modal/Sheet para adicionar tarefa
-│   │   │   └── S_Task.swift        # Modal/Sheet para visualizar/editar tarefa
-│   │   ├── Subjects/               # Fluxo de Matérias e Grade Horária
-│   │   │   ├── S_AddExam.swift     # Modal para adicionar nota de exame
-│   │   │   ├── S_AddSubject.swift  # Modal para adicionar matéria
-│   │   │   ├── ScheduleView.swift  # Tela de grade de horários
-│   │   │   ├── SubjectListView.swift # Lista geral de matérias
-│   │   │   └── SubjectView.swift   # Detalhes de uma matéria específica
-│   │   ├── Tasks/                  # Fluxo de Tarefas
-│   │   │   ├── ArchTasksView.swift # Tela de tarefas arquivadas/concluídas
-│   │   │   ├── TaskDetailView.swift # Detalhes de uma tarefa específica
-│   │   │   └── TaskView.swift      # Tela principal de listagem de tarefas
-│   │   ├── ContentView.swift       # Hub principal/Roteador inicial
-│   │   ├── OnboardingView.swift    # Tela de introdução para novos usuários
-│   │   └── TabView.swift           # Barra de navegação inferior do app
-│   └── Assets.xcassets             # Ícones, cores personalizadas e imagens
+OneTask/
+├── CONTRIBUTING.md                # Diretrizes de contribuição
+├── README.md                      # Documentação principal do projeto
+└── OneTask/
+    ├── App/                        # Ciclo de vida e configurações globais do app
+    ├── Assets.xcassets             # Ícones, cores personalizadas e imagens
+    ├── Models/                     # Estruturas de dados
+    │   ├── ExtraCurricular.swift   # Modelo de Atividades Extracurriculares
+    │   ├── Subject.swift           # Modelo de Matérias/Disciplinas
+    │   └── Task.swift              # Modelo de Tarefas
+    │
+    └── Views/                      # Telas e Componentes visuais
+        ├── Components/             # Subvisões e componentes reutilizáveis
+        │   ├── DateLimitSegmentedControl.swift # Controle segmentado de datas da TaskView
+        │   ├── S_Task.swift        # Modal/Sheet para criação ou edição de tarefas
+        │   ├── TaskDetail.swift    # Componente visual da tarefa na TaskView
+        │   └── UserTaskTransfer.swift # Componente para funcionamento do Drag & Drop
+        │
+        ├── Subjects/               # Fluxo de Matérias, Grade Horária e Extracurriculares
+        │   ├── AddExamView.swift   # Tela/Modal para adicionar nota de avaliações
+        │   ├── ExtracurricularView.swift # Tela para gerenciamento de atividades extracurriculares
+        │   ├── S_AddSubject.swift  # Modal para adicionar disciplina/extracurriculares
+        │   ├── SubjectListView.swift # Lista geral de matérias
+        │   └── SubjectView.swift   # Detalhes de uma matéria específica
+        │
+        ├── Tasks/                  # Fluxo de Tarefas
+        │   ├── ArchTasksView.swift # Tela de tarefas arquivadas/concluídas
+        │   └── TaskView.swift      # Tela principal de listagem de tarefas
+        │
+        ├── OnboardingAddSubjectView.swift # Etapa de adição de matérias no fluxo de onboarding
+        ├── OnboardingView.swift    # Tela de introdução para novos usuários
+        └── TabViewStruct.swift     # Barra de navegação inferior do app
 ```
-
----
-
-## ✅ Divisão de Tarefas
-
-| Responsável | Tarefa |
-| :--- | :--- |
-| Débora Lemos | ? | 
-| Gabriel Belo | ?|
-| Michel Silva | ? | 
-
----
-
-## 📈 Desafios & Lições
-
-### Desafio 1: ...
-
-- Solução: ...
 
 ---
 
 ## 📸 Mural de Fotos (Screenshots)
 
-Veja como está ficando a interface do nosso aplicativo:
+A interface do nosso aplicativo:
+
+### Onboarding
+
+![onboarding_1](Screens/Onboarding_1.png)
+
+![onboarding_2](Screens/Onboarding_2.png)
+
+### Atividades
+
+![TaskList](Screens/TaskList.png)
+
+![AddTask](Screens/AddTask.png)
+
+![EditTask](Screens/EditTask.png)
+
+### Disciplinas
+
+![SubjectList](Screens/SubjectList.png)
+
+![SubjectView](Screens/ViewSubject.png)
 
 ---
 

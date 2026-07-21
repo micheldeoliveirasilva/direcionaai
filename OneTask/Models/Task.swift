@@ -62,7 +62,7 @@ enum TaskSubject: Hashable {
 }
 
 @Model
-class UserTask {
+class userTask {
     
     var id: UUID
     var taskName: String
@@ -88,6 +88,7 @@ class UserTask {
         self.taskName = taskName
         self.priority = priority
         self.subject = subject
+        self.activity = activity
         self.dateLimit = dateLimit
         self.notes = notes
         self.status = status

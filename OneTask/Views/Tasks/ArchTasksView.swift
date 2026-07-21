@@ -12,11 +12,11 @@ import SwiftData
 
 struct ArchTasksView: View {
     
-    @Query var tasks: [UserTask]
-    @State private var selectedTask: UserTask?
+    @Query var tasks: [userTask]
+    @State private var selectedTask: userTask?
     @State private var currentDetent: PresentationDetent = .medium
     
-    private var toDoTasks: [UserTask] {
+    private var toDoTasks: [userTask] {
         tasks.filter { $0.status == .archived }
     }
     

@@ -11,7 +11,7 @@ import SwiftData
 struct SubjectListView: View {
     
     @Environment(\.modelContext) private var modelContext
-    
+
     @Query private var subjects: [Subject]
     @Query private var activities: [ExtracurricularActivity]
     
@@ -272,7 +272,7 @@ struct SubjectListView: View {
             for: [
                 Subject.self,
                 ExtracurricularActivity.self,
-                UserTask.self
+                userTask.self
             ],
             inMemory: true
         )

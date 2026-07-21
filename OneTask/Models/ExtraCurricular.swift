@@ -9,7 +9,10 @@ import Foundation
 import SwiftData
 
 @Model
-class ExtracurricularActivity {
+final class ExtracurricularActivity {
+    
+    @Relationship(deleteRule: .cascade, inverse: \userTask.activity)
+    var tasks: [userTask] = []
     
     var name: String
     var activitySchedule: [SubjectDay]

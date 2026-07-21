@@ -109,6 +109,9 @@ struct SubjectDay: Codable, Hashable {
 @Model
 final class Subject {
     
+    @Relationship(deleteRule: .cascade, inverse: \userTask.subject)
+    var tasks: [userTask] = []
+    
     var exams: [Exams]
     
     var subjectName: String

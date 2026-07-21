@@ -18,6 +18,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		9C6D5CF6300FA14C003623C9 /* Screens */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		AC2FAC872FED5C46000F3963 /* OneTask */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OneTask;
@@ -43,6 +48,7 @@
 				AC2FAC862FED5C46000F3963 /* Products */,
 				9CFF2D622FEF073700E93377 /* CONTRIBUTING.md */,
 				9CFF2D5F2FEF072600E93377 /* README.md */,
+				9C6D5CF6300FA14C003623C9 /* Screens */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +76,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				9C6D5CF6300FA14C003623C9 /* Screens */,
 				AC2FAC872FED5C46000F3963 /* OneTask */,
 			);
 			name = OneTask;
@@ -87,7 +94,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2650;
-				LastUpgradeCheck = 2650;
+				LastUpgradeCheck = 2660;
 				TargetAttributes = {
 					AC2FAC842FED5C46000F3963 = {
 						CreatedOnToolsVersion = 26.5;
@@ -195,6 +202,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -252,6 +260,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
