@@ -14,13 +14,13 @@
 /* Begin PBXFileReference section */
 		9CFF2D5F2FEF072600E93377 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9CFF2D622FEF073700E93377 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
-		AC2FAC852FED5C46000F3963 /* direcionaai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = direcionaai.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2FAC852FED5C46000F3963 /* OneTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AC2FAC872FED5C46000F3963 /* direcionaai */ = {
+		AC2FAC872FED5C46000F3963 /* OneTask */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = direcionaai;
+			path = OneTask;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -39,7 +39,7 @@
 		AC2FAC7C2FED5C46000F3963 = {
 			isa = PBXGroup;
 			children = (
-				AC2FAC872FED5C46000F3963 /* direcionaai */,
+				AC2FAC872FED5C46000F3963 /* OneTask */,
 				AC2FAC862FED5C46000F3963 /* Products */,
 				9CFF2D622FEF073700E93377 /* CONTRIBUTING.md */,
 				9CFF2D5F2FEF072600E93377 /* README.md */,
@@ -49,7 +49,7 @@
 		AC2FAC862FED5C46000F3963 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AC2FAC852FED5C46000F3963 /* direcionaai.app */,
+				AC2FAC852FED5C46000F3963 /* OneTask.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +57,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AC2FAC842FED5C46000F3963 /* direcionaai */ = {
+		AC2FAC842FED5C46000F3963 /* OneTask */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC2FAC902FED5C47000F3963 /* Build configuration list for PBXNativeTarget "direcionaai" */;
+			buildConfigurationList = AC2FAC902FED5C47000F3963 /* Build configuration list for PBXNativeTarget "OneTask" */;
 			buildPhases = (
 				AC2FAC812FED5C46000F3963 /* Sources */,
 				AC2FAC822FED5C46000F3963 /* Frameworks */,
@@ -70,13 +70,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AC2FAC872FED5C46000F3963 /* direcionaai */,
+				AC2FAC872FED5C46000F3963 /* OneTask */,
 			);
-			name = direcionaai;
+			name = OneTask;
 			packageProductDependencies = (
 			);
 			productName = direcionaai;
-			productReference = AC2FAC852FED5C46000F3963 /* direcionaai.app */;
+			productReference = AC2FAC852FED5C46000F3963 /* OneTask.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -94,7 +94,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AC2FAC802FED5C46000F3963 /* Build configuration list for PBXProject "direcionaai" */;
+			buildConfigurationList = AC2FAC802FED5C46000F3963 /* Build configuration list for PBXProject "OneTask" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -108,7 +108,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AC2FAC842FED5C46000F3963 /* direcionaai */,
+				AC2FAC842FED5C46000F3963 /* OneTask */,
 			);
 		};
 /* End PBXProject section */
@@ -278,7 +278,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.michel.direcionaai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michel.onetask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -311,7 +311,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.michel.direcionaai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michel.onetask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -326,7 +326,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AC2FAC802FED5C46000F3963 /* Build configuration list for PBXProject "direcionaai" */ = {
+		AC2FAC802FED5C46000F3963 /* Build configuration list for PBXProject "OneTask" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC2FAC8E2FED5C47000F3963 /* Debug */,
@@ -335,7 +335,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC2FAC902FED5C47000F3963 /* Build configuration list for PBXNativeTarget "direcionaai" */ = {
+		AC2FAC902FED5C47000F3963 /* Build configuration list for PBXNativeTarget "OneTask" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC2FAC912FED5C47000F3963 /* Debug */,
