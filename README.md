@@ -59,27 +59,23 @@ OneTask/
 
 ## 📸 Mural de Fotos (Screenshots)
 
-A interface do nosso aplicativo:
+> A interface do nosso aplicativo:
 
 ### Onboarding
 
-![onboarding_1](Screens/Onboarding_1.png)
-
-![onboarding_2](Screens/Onboarding_2.png)
+<img src="Screens/Onboarding_1.png" width="300" alt="Onboarding_1">
+<img src="Screens/Onboarding_2.png" width="300" alt="Onboarding_2">
 
 ### Atividades
 
-![TaskList](Screens/TaskList.png)
-
-![AddTask](Screens/AddTask.png)
-
-![EditTask](Screens/EditTask.png)
+<img src="Screens/TaskList.png" width="300" alt="TaskList">
+<img src="Screens/AddTask.png" width="300" alt="AddTask">
+<img src="Screens/EditTask.png" width="300" alt="EditTask">
 
 ### Disciplinas
 
-![SubjectList](Screens/SubjectList.png)
-
-![SubjectView](Screens/ViewSubject.png)
+<img src="Screens/SubjectList.png" width="300" alt="SubjectList">
+<img src="Screens/ViewSubject.png" width="300" alt="SubjectView">
 
 ---
 
